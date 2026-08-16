@@ -1,1 +1,176 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Tree | Abasaya Family Heritage</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script type="module" src="js/components.js"></script>
+    <style>
+        /* Tree Specific Local Styles */
+        .tree-line-v { width: 2px; background: #D4AF37; margin: 0 auto; }
+        .tree-line-h { height: 2px; background: #D4AF37; }
+        .node-card {
+            background: #FDFBF7;
+            border: 1px solid #E5E7EB;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .node-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            border-color: #D4AF37;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-charcoal bg-gray-50 flex flex-col min-h-screen">
+    
+    <app-header></app-header>
+
+    <main class="flex-grow flex flex-col relative overflow-hidden">
+        <!-- Tree Header Toolbar -->
+        <div class="bg-white border-b border-gray-200 p-4 shadow-sm z-20 flex justify-between items-center">
+            <div>
+                <h1 class="font-serif text-2xl font-bold text-forest">Abasaya Family Tree</h1>
+                <p class="text-xs text-gray-500 uppercase tracking-widest mt-1">Interactive Canvas</p>
+            </div>
+            <div class="flex space-x-2">
+                <button id="zoom-in" class="p-2 bg-gray-100 hover:bg-gray-200 rounded text-forest" aria-label="Zoom In">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+                </button>
+                <button id="zoom-out" class="p-2 bg-gray-100 hover:bg-gray-200 rounded text-forest" aria-label="Zoom Out">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM13 10H7"></path></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Canvas Area -->
+        <div class="flex-grow bg-[#f3f4f6] relative tree-container" id="tree-canvas-wrapper">
+            <div id="tree-root" class="p-12 transition-transform duration-300 transform origin-top center flex justify-center w-full min-w-max">
+                <!-- Tree built by JS -->
+                <div class="text-center p-8 text-gray-400 font-serif italic">Loading generational data...</div>
+            </div>
+        </div>
+    </main>
+
+    <script type="module">
+        import { FamilyService } from './js/firebase-service.js';
+        
+        let scale = 1;
+        const wrapper = document.getElementById('tree-canvas-wrapper');
+        const root = document.getElementById('tree-root');
+
+        // Zoom Controls
+        document.getElementById('zoom-in').addEventListener('click', () => { scale = Math.min(scale + 0.1, 2); updateScale(); });
+        document.getElementById('zoom-out').addEventListener('click', () => { scale = Math.max(scale - 0.1, 0.5); updateScale(); });
+        
+        function updateScale() {
+            root.style.transform = `scale(${scale})`;
+        }
+
+        // Render Tree
+        async function renderTree() {
+            try {
+                const data = await FamilyService.getTreeData();
+                root.innerHTML = ''; // Clear loading text
+
+                // Central Ancestor Node
+                const centralHtml = `
+                    <div class="flex flex-col items-center">
+                        <div class="node-card w-64 p-4 rounded-lg text-center bg-forest text-parchment relative z-10">
+                            <div class="w-16 h-16 mx-auto bg-gold rounded-full border-2 border-white shadow overflow-hidden mb-3">
+                                <img src="assets/images/late-musa-ibrahim-placeholder.jpg" alt="Late Musa Ibrahim" class="w-full h-full object-cover">
+                            </div>
+                            <h2 class="font-serif font-bold text-lg">${data.centralAncestor}</h2>
+                            <p class="text-xs text-gold uppercase mt-1 tracking-wider">Patriarch</p>
+                        </div>
+                        <div class="tree-line-v h-12"></div>
+                        <div class="relative w-full flex justify-center">
+                            <!-- Horizontal connecting line for top level branches -->
+                            <div class="absolute top-0 tree-line-h" style="width: 90%; z-index: 0;"></div>
+                            
+                            <!-- Branches -->
+                            <div class="flex space-x-8 pt-4 relative z-10" id="branches-container">
+                                ${renderBranches(data.branches)}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                root.innerHTML = centralHtml;
+
+            } catch (e) {
+                root.innerHTML = `<div class="text-red-500 bg-red-50 p-4 rounded border border-red-200">Error loading tree data. Please try again.</div>`;
+                console.error(e);
+            }
+        }
+
+        function renderBranches(branches) {
+            // For performance and display scope, rendering a structured vertical list per branch 
+            return branches.map(branch => {
+                const childrenHtml = branch.descendants.map(person => {
+                    const uncertain = person.name.includes('(?)') ? '<span class="inline-block ml-1 w-2 h-2 rounded-full bg-red-400" title="Needs Verification"></span>' : '';
+                    
+                    let subChildrenHtml = '';
+                    if (person.children && person.children.length > 0) {
+                        subChildrenHtml = `
+                            <div class="ml-4 mt-2 border-l border-gold/40 pl-4 space-y-2 text-sm">
+                                ${person.children.map(child => {
+                                    const cUncertain = child.includes('(?)') ? '<span class="inline-block ml-1 w-2 h-2 rounded-full bg-red-400" title="Needs Verification"></span>' : '';
+                                    return `<div class="flex items-center text-gray-600"><span class="w-2 h-px bg-gold/40 mr-2"></span>${child}${cUncertain}</div>`;
+                                }).join('')}
+                            </div>
+                        `;
+                    }
+
+                    return `
+                        <div class="mt-4 first:mt-0 text-left bg-white p-3 rounded border border-gray-100 shadow-sm text-sm">
+                            <div class="font-semibold text-gray-800 flex items-center">${person.name}${uncertain}</div>
+                            ${subChildrenHtml}
+                        </div>
+                    `;
+                }).join('');
+
+                return `
+                    <div class="flex flex-col items-center w-72">
+                        <div class="tree-line-v h-4 -mt-4"></div>
+                        <div class="node-card w-full p-4 rounded-lg text-center bg-white border-t-4 border-gold z-10 mb-6">
+                            <h3 class="font-serif font-bold text-forest">${branch.branchName}</h3>
+                            <p class="text-xs text-gray-500 uppercase mt-1">Branch</p>
+                        </div>
+                        <div class="w-full flex flex-col space-y-2">
+                            ${childrenHtml}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        renderTree();
+
+        // Basic Panning
+        let isDown = false;
+        let startX, startY, scrollLeft, scrollTop;
+        
+        wrapper.addEventListener('mousedown', (e) => {
+            isDown = true;
+            startX = e.pageX - wrapper.offsetLeft;
+            startY = e.pageY - wrapper.offsetTop;
+            scrollLeft = wrapper.scrollLeft;
+            scrollTop = wrapper.scrollTop;
+        });
+        wrapper.addEventListener('mouseleave', () => isDown = false);
+        wrapper.addEventListener('mouseup', () => isDown = false);
+        wrapper.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - wrapper.offsetLeft;
+            const y = e.pageY - wrapper.offsetTop;
+            const walkX = (x - startX) * 1.5;
+            const walkY = (y - startY) * 1.5;
+            wrapper.scrollLeft = scrollLeft - walkX;
+            wrapper.scrollTop = scrollTop - walkY;
+        });
+    </script>
+</body>
+</html>
