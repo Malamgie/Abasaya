@@ -1,1 +1,58 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memorial | Abasaya Family Heritage</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script type="module" src="js/components.js"></script>
+</head>
+<body class="font-sans antialiased text-charcoal bg-parchment min-h-screen flex flex-col">
+    
+    <app-header></app-header>
+
+    <main class="flex-grow py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+        <div class="text-center mb-16">
+            <h1 class="font-serif text-4xl font-bold text-forest mb-4">In Loving Memory</h1>
+            <p class="text-gray-600 max-w-2xl mx-auto italic font-serif text-lg">"Verily we belong to Allah, and verily to Him do we return."</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10" id="memorial-grid">
+            <!-- Populated via JS Seed Data -->
+        </div>
+    </main>
+
+    <app-footer></app-footer>
+
+    <script type="module">
+        import { FamilyService } from './js/firebase-service.js';
+        
+        async function loadMemorials() {
+            const grid = document.getElementById('memorial-grid');
+            const memorials = await FamilyService.getMemorials();
+
+            grid.innerHTML = memorials.map((name, index) => `
+                <div class="bg-white rounded-xl shadow-lg border border-gold/20 overflow-hidden text-center flex flex-col">
+                    <div class="h-32 bg-forest relative flex justify-center pt-8">
+                        <!-- Frame overlap -->
+                        <div class="absolute -bottom-12 w-28 h-28 rounded-full border-4 border-white bg-gray-200 overflow-hidden shadow-md">
+                            <img src="assets/images/memorial/late-${index}-placeholder.jpg" alt="${name}" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <div class="pt-16 pb-8 px-6 flex-grow flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-serif text-xl font-bold text-gray-900 mb-1">${name}</h3>
+                            <p class="text-sm text-gold uppercase tracking-widest mb-4">Honored Ancestor</p>
+                            <p class="text-gray-600 text-sm italic mb-6">May Allah grant them Al-Jannatul Firdaus.</p>
+                        </div>
+                        <button class="text-sm font-semibold text-forest hover:text-gold transition border border-gray-200 rounded py-2 hover:border-gold">Read their story</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        loadMemorials();
+    </script>
+</body>
+</html>
