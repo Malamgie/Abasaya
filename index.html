@@ -1,1 +1,152 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abasaya Family Heritage | Preserving Our Roots</title>
+    <meta name="description" content="An evolving digital archive dedicated to preserving the people, stories, memories, and generations of the Abasaya family.">
+    <link rel="stylesheet" href="css/style.css">
+    <script type="module" src="js/components.js"></script>
+    <script type="module" src="js/app.js"></script>
+</head>
+<body class="font-sans antialiased text-charcoal bg-parchment">
+    
+    <app-header></app-header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative bg-forest w-full h-[80vh] min-h-[600px] flex items-center justify-center overflow-hidden">
+            <!-- Background Image with Overlay -->
+            <div class="absolute inset-0 z-0">
+                <img src="assets/images/hero-family-placeholder.jpg" alt="Abasaya Family Heritage Background" class="w-full h-full object-cover opacity-30 mix-blend-overlay">
+                <div class="absolute inset-0 bg-gradient-to-t from-forest via-forest/80 to-transparent"></div>
+            </div>
+            
+            <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
+                <p class="text-gold tracking-[0.3em] uppercase text-sm font-semibold mb-4 drop-shadow-md">Welcome to the</p>
+                <h1 class="font-serif text-5xl md:text-7xl text-parchment font-bold mb-6 drop-shadow-lg">Abasaya Family Heritage</h1>
+                <p class="text-xl md:text-2xl text-gray-200 font-serif italic mb-6">Preserving Our Roots. Connecting Our Generations.</p>
+                <p class="text-base md:text-lg text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed">
+                    An evolving digital archive dedicated to preserving the people, stories, memories, and generations of the Abasaya family.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="family-tree.html" class="bg-gold text-forest hover:bg-yellow-500 px-8 py-3 rounded text-lg font-semibold transition-all shadow-lg w-full sm:w-auto">Explore the Family Tree</a>
+                    <a href="story.html" class="bg-transparent border border-parchment text-parchment hover:bg-white/10 px-8 py-3 rounded text-lg font-semibold transition-all shadow-lg w-full sm:w-auto">Discover Our Story</a>
+                </div>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+                <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+            </div>
+        </section>
+
+        <!-- Ancestor Legacy Section -->
+        <section class="py-24 bg-parchment relative">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="relative">
+                    <div class="absolute inset-0 bg-gold/20 transform translate-x-4 translate-y-4 rounded-lg"></div>
+                    <img src="assets/images/late-musa-ibrahim-placeholder.jpg" alt="Late Musa Ibrahim — Placeholder Portrait" class="relative z-10 w-full h-[500px] object-cover rounded-lg shadow-xl border border-forest/10">
+                </div>
+                <div>
+                    <h2 class="text-gold tracking-widest uppercase text-sm font-bold mb-2">The Central Ancestor</h2>
+                    <h3 class="font-serif text-4xl text-forest font-bold mb-6">Late Alhaji Musa Ibrahim <span class="block text-2xl font-normal italic mt-2 text-gray-600">(Abasaya)</span></h3>
+                    <div class="prose prose-lg text-gray-700 font-serif leading-relaxed mb-8 border-l-4 border-gold pl-6">
+                        <p>Our lineage finds its documented center here. The generations that follow are united by his legacy, memory, and the enduring values he imparted to his children.</p>
+                        <p class="italic text-sm text-gray-500 mt-4">"May Allah (SWT) forgive his shortcomings and grant him Al-Jannatul Firdaus. Ameen."</p>
+                    </div>
+                    <a href="story.html" class="inline-flex items-center text-forest font-bold hover:text-gold transition">
+                        Read the full biography 
+                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Family Statistics Dashboard -->
+        <section class="py-20 bg-forest text-parchment relative overflow-hidden">
+            <!-- Subtle background pattern -->
+            <div class="absolute inset-0 opacity-5" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 32px 32px;"></div>
+            
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="text-center mb-16">
+                    <h2 class="font-serif text-3xl font-bold mb-4">By the Numbers</h2>
+                    <p class="text-gold font-sans uppercase tracking-widest text-sm">Source Data Family Statistics</p>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+                    <div class="text-center p-6 bg-[#0E3A2F] rounded-lg border border-gold/10 shadow-lg">
+                        <p class="text-4xl font-serif font-bold text-gold mb-2 stat-counter" data-stat="totalMembers">310</p>
+                        <p class="text-xs uppercase tracking-wider text-gray-300">Total Members</p>
+                    </div>
+                    <div class="text-center p-6 bg-[#0E3A2F] rounded-lg border border-gold/10 shadow-lg">
+                        <p class="text-4xl font-serif font-bold text-gold mb-2 stat-counter" data-stat="male">180</p>
+                        <p class="text-xs uppercase tracking-wider text-gray-300">Male</p>
+                    </div>
+                    <div class="text-center p-6 bg-[#0E3A2F] rounded-lg border border-gold/10 shadow-lg">
+                        <p class="text-4xl font-serif font-bold text-gold mb-2 stat-counter" data-stat="female">130</p>
+                        <p class="text-xs uppercase tracking-wider text-gray-300">Female</p>
+                    </div>
+                    <div class="text-center p-6 bg-[#0E3A2F] rounded-lg border border-gold/10 shadow-lg">
+                        <p class="text-4xl font-serif font-bold text-gray-400 mb-2">3</p>
+                        <p class="text-xs uppercase tracking-wider text-gray-300">Deceased Identified</p>
+                    </div>
+                </div>
+
+                <div class="bg-[#0A241D] rounded-xl p-8 border border-white/5 text-center max-w-4xl mx-auto">
+                    <h3 class="font-serif text-xl mb-6 border-b border-white/10 pb-4 inline-block px-8">Descendants of Late Musa Ibrahim</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                        <div>
+                            <p class="text-3xl font-bold text-parchment stat-counter" data-stat="children">22</p>
+                            <p class="text-sm text-gray-400 mt-1">Children</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-bold text-parchment stat-counter" data-stat="grandchildren">125</p>
+                            <p class="text-sm text-gray-400 mt-1">Grandchildren</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-bold text-parchment stat-counter" data-stat="greatGrandchildren">160</p>
+                            <p class="text-sm text-gray-400 mt-1">Great-Grandchildren</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Family Tree Teaser -->
+        <section class="py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 text-center">
+                <h2 class="font-serif text-4xl font-bold text-forest mb-4">Explore Our Family Tree</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto mb-10 text-lg">
+                    "From one generation to the next, every name represents a story, a relationship, and a part of our shared heritage."
+                </p>
+                <div class="bg-parchment border border-gray-200 rounded-xl p-4 shadow-inner mb-8 h-64 flex items-center justify-center relative overflow-hidden">
+                    <div class="absolute inset-0 opacity-10" style="background-image: repeating-linear-gradient(45deg, #0B2C24 25%, transparent 25%, transparent 75%, #0B2C24 75%, #0B2C24), repeating-linear-gradient(45deg, #0B2C24 25%, transparent 25%, transparent 75%, #0B2C24 75%, #0B2C24); background-position: 0 0, 10px 10px; background-size: 20px 20px;"></div>
+                    <div class="relative z-10 flex flex-col items-center">
+                        <div class="w-16 h-16 bg-forest rounded-full flex items-center justify-center mb-4 text-gold border-2 border-gold shadow-lg">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+                        </div>
+                        <p class="text-forest font-serif font-bold text-xl">Interactive Genealogy Canvas</p>
+                        <p class="text-sm text-gray-500 mt-2">View generations, zoom, pan, and explore branches.</p>
+                    </div>
+                </div>
+                <a href="family-tree.html" class="inline-block bg-forest text-parchment hover:bg-gray-800 px-8 py-3 rounded font-semibold shadow-lg transition">
+                    Explore Full Family Tree &rarr;
+                </a>
+            </div>
+        </section>
+
+        <!-- CTA Family Portal -->
+        <section class="py-20 bg-parchment border-t border-b border-gray-200 text-center">
+            <h2 class="font-serif text-3xl font-bold text-forest mb-4">A Private Space for the Family</h2>
+            <p class="text-gray-600 mb-8 italic">"Some memories belong within the family."</p>
+            <a href="portal.html" class="inline-block border-2 border-forest text-forest hover:bg-forest hover:text-parchment px-8 py-3 rounded font-bold transition-colors shadow-sm">
+                Enter Family Portal
+            </a>
+        </section>
+    </main>
+
+    <app-footer></app-footer>
+</body>
+</html>
