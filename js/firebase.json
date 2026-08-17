@@ -1,0 +1,389 @@
+{
+"statistics": {
+"totalMembers": 310,
+"male": 180,
+"female": 130,
+"children": 22,
+"grandchildren": 125,
+"greatGrandchildren": 160,
+"deceasedIdentified": 3
+},
+"centralAncestor": {
+"name": "Late Musa Ibrahim (Abasaya)",
+"imageUrl": "assets/images/late-musa-ibrahim-placeholder.jpg"
+},
+"branches": {
+"branch_garba_musa": {
+"id": "branch_garba_musa",
+"branchName": "Garba Musa",
+"isFirstSon": true,
+"imageUrl": "",
+"descendantsCount": 24,
+"descendants": [
+{ "name": "Hauwa Garba", "isAlive": true, "imageUrl": "", "biography": "", "children": ["Shu'aibu Abdulrazaq", "Harira Abdulrazaq", "Yahaya Abdulrazaq", "Khadija Abdulrazaq", "Asma'u Abdulrazaq", "Rukayya Abdulrazaq", "Hauwa Abdulrazaq", "Kamal Muh'd Bashar", "Tauhid Muh'd Bashar"] },
+{ "name": "Sa'adatu Garba", "isAlive": true, "imageUrl": "", "biography": "", "children": ["Abdulrahman Ja'afar", "Hauwa Ja'afar", "Asma'u Ja'afar", "Abubakar Ja'afar", "Salamatu Ja'afar"] },
+{ "name": "Muhammad Garba", "isAlive": true, "imageUrl": "", "biography": "", "children": ["Ibrahim Muhammad", "Abdulmalik Muhammad", "Haruna Muhammad", "Abdullah Muhammad", "Abubakar Muhammad", "Musa Muhammad", "Alamin Muhammad"] },
+{ "name": "Usman Garba", "isAlive": true, "imageUrl": "", "biography": "", "children": ["Abubakar Usman", "Al-amin Usman", "Asma'u Usman", "Umar Farouk Usman", "Asma'u Usman", "Abdullah Usman", "Ibrahim Usman"] },
+{ "name": "Asma'u Garba", "isAlive": true, "imageUrl": "", "biography": "", "children": ["Nazir Sani", "Sadiq Sani", "Salimatu Sani", "Abdul Sani"] },
+{ "name": "Fatima Garba", "isAlive": true, "imageUrl": "", "biography": "", "children": ["Abba Ado", "Umaima Ado", "Ummu-Salma Ado"] },
+{ "name": "Muhammad Garba", "isAlive": true, "imageUrl": "", "biography": "", "children": ["Yahaya Muhammad", "Fatima Muhammad"] },
+{ "name": "Musa Garba", "isAlive": true, "imageUrl": "", "biography": "", "children": ["Abubakar Musa", "Adris Musa", "Ahmad Musa", "Alamin Musa"] },
+{ "name": "Fatima Garba", "isAlive": true, "imageUrl": "", "biography": "", "children": ["Fatima Usman", "Umar Usman", "Sadiq Usman", "Khadija Usman", "Sani Usman"] },
+{ "name": "Ibrahim Garba", "isAlive": true, "imageUrl": "", "biography": "", "children": ["Muhammad Ibrahim", "Sulaiman Ibrahim"] },
+{ "name": "Hafsat Garba", "isAlive": true, "imageUrl": "", "biography": "", "children": ["Abubakar Jabir", "Ahmad Jabir", "Abdul Jabir", "Khadija Jabir"] },
+{ "name": "Zainab Garba", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Muhammad Garba", "isAlive": true, "imageUrl": "", "biography": "", "children": ["Abubakar", "Isah Muhammad"] },
+{ "name": "Salamatu Garba", "isAlive": true, "imageUrl": "", "biography": "", "children": ["Umar Yusuf", "Sunusi Yusuf", "Sadik Yusuf"] },
+{ "name": "Maimuna Garba", "isAlive": true, "imageUrl": "", "biography": "", "children": ["Aisha Aliyu"] },
+{ "name": "Fatima Garba", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Musa Garba", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Amina Garba", "isAlive": true, "imageUrl": "", "biography": "", "children": ["Yasir Ibrahim"] },
+{ "name": "Sadiq Garba", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Aliyu Garba", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Saidu Garba", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Fatima Garba", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Aisha Garba", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Hafsat Garba", "isAlive": true, "imageUrl": "", "biography": "", "children": [] }
+]
+},
+"branch_late_ibrahim_musa": {
+"id": "branch_late_ibrahim_musa",
+"branchName": "Late Ibrahim Musa",
+"isFirstSon": false,
+"imageUrl": "",
+"descendantsCount": 4,
+"descendants": [
+{ "name": "Musa Ibrahim", "isAlive": true, "imageUrl": "", "biography": "", "children": ["Ibrahim Musa", "Mufti Musa"] },
+{ "name": "Bar'atu Ibrahim", "isAlive": true, "imageUrl": "", "biography": "", "children": ["Aisha Abdul"] },
+{ "name": "Rukayya Ibrahim", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Sadik Ibrahim", "isAlive": true, "imageUrl": "", "biography": "", "children": [] }
+]
+},
+"branch_yahaya_musa": {
+"id": "branch_yahaya_musa",
+"branchName": "Yahaya Musa",
+"isFirstSon": false,
+"imageUrl": "",
+"descendantsCount": 15,
+"descendants": [
+{ "name": "Asma'u Yahaya", "isAlive": true, "imageUrl": "", "biography": "", "children": ["Fatima Adamu", "Habiba Adamu"] },
+{ "name": "Abdurrahman Yahaya", "isAlive": true, "imageUrl": "", "biography": "", "children": ["Hajara Abdurrahman", "Fatima Abdurrahman"] },
+{ "name": "Isah Yahaya", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Khadija Yahaya", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Zainab Yahaya", "isAlive": true, "imageUrl": "", "biography": "", "children": ["Zainab Auwal", "Yahaya Auwal"] },
+{ "name": "Saifullahi Yahaya", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Nasir Yahaya", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Sadiq Yahaya", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Ummusalma Yahaya", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Fatima Yahaya", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Umar Yahaya", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Adamu Yahaya", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Asma'u Yahaya", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Amina Yahaya", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Hauwa'u Yahaya", "isAlive": true, "imageUrl": "", "biography": "", "children": [] }
+]
+},
+"branch_abdullahi_musa": {
+"id": "branch_abdullahi_musa",
+"branchName": "Abdullahi Musa",
+"isFirstSon": false,
+"imageUrl": "",
+"descendantsCount": 14,
+"descendants": [
+{ "name": "Ibrahim Abdullahi", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Nabil Abdullahi", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Amira Abdullahi", "isAlive": true, "imageUrl": "", "biography": "", "children": ["Farhan Huzaifa"] },
+{ "name": "Usman Abdullahi", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "***** Abdullahi", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Musa Abdullahi", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Fatima Abdullahi", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Muhammad Abdullahi", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Aisha Abdullahi", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Umar Abdullahi", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "***** Abdullahi", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Adam Abdullahi", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Maryam Abdullahi", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Hafsat Abdullahi", "isAlive": true, "imageUrl": "", "biography": "", "children": [] }
+]
+},
+"branch_muhammad_inuwa_musa": {
+"id": "branch_muhammad_inuwa_musa",
+"branchName": "Muhammad Inuwa Musa",
+"isFirstSon": false,
+"imageUrl": "",
+"descendantsCount": 4,
+"descendants": [
+{ "name": "Sadik Muhammad", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Shamsuddeen Muhammad", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Fatima Muhammad", "isAlive": true, "imageUrl": "", "biography": "", "children": ["Asad Muhammad"] },
+{ "name": "Rukayya Ibrahim (?)", "isAlive": true, "imageUrl": "", "biography": "", "children": [] }
+]
+},
+"branch_aishatu_musa": {
+"id": "branch_aishatu_musa",
+"branchName": "Aishatu Musa",
+"isFirstSon": false,
+"imageUrl": "",
+"descendantsCount": 7,
+"descendants": [
+{ "name": "Aisha Modibbo", "isAlive": true, "imageUrl": "", "biography": "", "children": ["Shahida Muh'd", "Shaheed Muh'd", "Sultana Muh'd", "Hanan Muh'd"] },
+{ "name": "Yahaya Modibbo", "isAlive": true, "imageUrl": "", "biography": "", "children": ["Muhseen Yahaya", "Adil Yahaya", "Abdullahi Yahaya"] },
+{ "name": "Rabi'atu Modibbo", "isAlive": true, "imageUrl": "", "biography": "", "children": ["Aisha Sani", "Adamu Sani", "Fatima Sani", "Muhammad Sani", "Abdulqadir Sani"] },
+{ "name": "Bakisu Modibbo", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Abubakar Abubakar", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Harira Modibbo", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Umar Modibbo", "isAlive": true, "imageUrl": "", "biography": "", "children": [] }
+]
+},
+"branch_lami_musa": {
+"id": "branch_lami_musa",
+"branchName": "Lami Musa",
+"isFirstSon": false,
+"imageUrl": "",
+"descendantsCount": 4,
+"descendants": [
+{ "name": "Aisha Abdullahi", "isAlive": true, "imageUrl": "", "biography": "", "children": ["Mufida Baffaji", "Husna Baffaji", "Salamatu Muh'd", "Fatima Muh'd"] },
+{ "name": "Dantala Abdullahi", "isAlive": true, "imageUrl": "", "biography": "", "children": ["Abdullahi Muh'd", "Sani Muh'd", "Maryam Muh'd", "Sadiya Muh'd", "Adamu Muh'd", "Aisha Muh'd"] },
+{ "name": "Sadiya Abdullahi", "isAlive": true, "imageUrl": "", "biography": "", "children": ["Jafar Yusuf", "Zainab Yusuf"] },
+{ "name": "Zainab Abdullahi", "isAlive": true, "imageUrl": "", "biography": "", "children": [] }
+]
+},
+"branch_hassana_musa": {
+"id": "branch_hassana_musa",
+"branchName": "Hassana Musa",
+"isFirstSon": false,
+"imageUrl": "",
+"descendantsCount": 8,
+"descendants": [
+{ "name": "Amina Abba", "isAlive": true, "imageUrl": "", "biography": "", "children": ["Abubakar Musa", "Haruna Musa", "Hajara Musa", "Hajara Musa", "Fatima Musa", "Khadija Musa", "Fatima Musa"] },
+{ "name": "Aliyu Abba", "isAlive": true, "imageUrl": "", "biography": "", "children": ["Afnan Aliyu", "Fatima Aliyu"] },
+{ "name": "Musa Abba", "isAlive": true, "imageUrl": "", "biography": "", "children": ["Abba Musa", "Aisha Musa"] },
+{ "name": "Abubakar Abba", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Abdullahi Abba", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Sadiqu Abba", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Khalipha Abba", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Habiba Abba", "isAlive": true, "imageUrl": "", "biography": "", "children": [] }
+]
+},
+"branch_fatima_musa": {
+"id": "branch_fatima_musa",
+"branchName": "Fatima Musa",
+"isFirstSon": false,
+"imageUrl": "",
+"descendantsCount": 12,
+"descendants": [
+{ "name": "Jamaluddeen Baba", "isAlive": true, "imageUrl": "", "biography": "", "children": ["Adamu Jamaluddeen", "Auwalu Jamaluddeen", "Fatima Jamaluddeen"] },
+{ "name": "Zaharaddeen Baba", "isAlive": true, "imageUrl": "", "biography": "", "children": ["Abdullahi Zaharaddeen", "Fatima Zaharaddeen", "Muhamoud Zaharaddeen"] },
+{ "name": "Nasiruddeen Baba (?)", "isAlive": true, "imageUrl": "", "biography": "", "children": ["Abdurraman Nasir", "Maryam Nasir"] },
+{ "name": "Nuruddeen Baba", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Shehu Baba", "isAlive": true, "imageUrl": "", "biography": "", "children": ["Fatima Shehu"] },
+{ "name": "Musa Baba", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Zainab Baba", "isAlive": true, "imageUrl": "", "biography": "", "children": ["Fatima Sani", "Jawad Sani"] },
+{ "name": "Abubakar Baba", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Amina Baba", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Khadija Baba", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Aisha Baba", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Halima Baba", "isAlive": true, "imageUrl": "", "biography": "", "children": [] }
+]
+},
+"branch_khadija_musa": {
+"id": "branch_khadija_musa",
+"branchName": "Khadija Musa",
+"isFirstSon": false,
+"imageUrl": "",
+"descendantsCount": 3,
+"descendants": [
+{ "name": "Bashar Baba", "isAlive": true, "imageUrl": "", "biography": "", "children": ["Sauban Bashar", "Shehu Bashar", "Khadija Bashar"] },
+{ "name": "Jamila Idris", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Muhammad Idris", "isAlive": true, "imageUrl": "", "biography": "", "children": [] }
+]
+},
+"branch_sani_musa": {
+"id": "branch_sani_musa",
+"branchName": "Sani Musa",
+"isFirstSon": false,
+"imageUrl": "",
+"descendantsCount": 18,
+"descendants": [
+{ "name": "Sadiq Sani", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Abdulkadir Sani", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Fatima Sani", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Abdurrahman Sani", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Shurahabil Sani", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Usman Sani", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Suleiman Sani", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Hassan Sani", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Raihan Sani", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Yahaya Sani", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Ibrahim Sani", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Musa Sani", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Ibrahim Sani", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Yusuf Sani", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Ismail Sani", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Umar Sani", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Isah Sani", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Alamin Sani", "isAlive": true, "imageUrl": "", "biography": "", "children": [] }
+]
+},
+"branch_danjuma_musa": {
+"id": "branch_danjuma_musa",
+"branchName": "Danjuma Musa",
+"isFirstSon": false,
+"imageUrl": "",
+"descendantsCount": 3,
+"descendants": [
+{ "name": "Maryam Danjuma", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Ibrahim Danjuma", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Fatima Danjuma", "isAlive": true, "imageUrl": "", "biography": "", "children": [] }
+]
+},
+"branch_abdullahi_musa_2": {
+"id": "branch_abdullahi_musa_2",
+"branchName": "Abdullahi Musa",
+"isFirstSon": false,
+"imageUrl": "",
+"descendantsCount": 4,
+"descendants": [
+{ "name": "Aisha Abdullahi", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Abdurrahman Abdullahi", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Musa Abdullahi", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Zinatu Abdullahi", "isAlive": true, "imageUrl": "", "biography": "", "children": [] }
+]
+},
+"branch_jibril_musa": {
+"id": "branch_jibril_musa",
+"branchName": "Jibril Musa",
+"isFirstSon": false,
+"imageUrl": "",
+"descendantsCount": 8,
+"descendants": [
+{ "name": "Fatima Jibril", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Nasir Jibril", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Ibrahim Jibril", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Abubakar Jibril", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Aisha Jibril", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Sadiq Jibril", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Aliyu Jibril", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Hauwa Jibril", "isAlive": true, "imageUrl": "", "biography": "", "children": [] }
+]
+},
+"branch_fatima_musa_2": {
+"id": "branch_fatima_musa_2",
+"branchName": "Fatima Musa",
+"isFirstSon": false,
+"imageUrl": "",
+"descendantsCount": 9,
+"descendants": [
+{ "name": "Umar Danladi", "isAlive": true, "imageUrl": "", "biography": "", "children": ["Musaddiq Umar"] },
+{ "name": "Aisha Bamanga", "isAlive": true, "imageUrl": "", "biography": "", "children": ["Aisha Adamu", "Abdulaziz Adamu", "Khalifa Adamu"] },
+{ "name": "Abdul Bamanga", "isAlive": true, "imageUrl": "", "biography": "", "children": ["Fatima Abdul", "Ahmad Abdul"] },
+{ "name": "Sadiq Bamanga", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Usman Bamanga", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Umar Bamanga", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Zainab Bamanga", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Alamin Bamanga", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Aliyu Bamanga", "isAlive": true, "imageUrl": "", "biography": "", "children": [] }
+]
+},
+"branch_aishatu_musa_2": {
+"id": "branch_aishatu_musa_2",
+"branchName": "Aishatu Musa",
+"isFirstSon": false,
+"imageUrl": "",
+"descendantsCount": 9,
+"descendants": [
+{ "name": "Zainab Abdullahi", "isAlive": true, "imageUrl": "", "biography": "", "children": ["Abdullahi Abba"] },
+{ "name": "Hussain Abdullahi", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Hussain Abdullahi", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Nabila Abdullahi", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Hafsat Abdullahi", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Asma'u Abdullahi", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Ahmad Abdullahi", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Zainab Abdullahi", "isAlive": true, "imageUrl": "", "biography": "", "children": [] }
+]
+},
+"branch_maimuna_musa": {
+"id": "branch_maimuna_musa",
+"branchName": "Maimuna Musa",
+"isFirstSon": false,
+"imageUrl": "",
+"descendantsCount": 4,
+"descendants": [
+{ "name": "Muhktar Shehu", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Khalifa Shehu", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Muh'd Shehu", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Aisha Shehu", "isAlive": true, "imageUrl": "", "biography": "", "children": [] }
+]
+},
+"branch_late_shehu_musa": {
+"id": "branch_late_shehu_musa",
+"branchName": "Late Shehu Musa",
+"isFirstSon": false,
+"imageUrl": "",
+"descendantsCount": 3,
+"descendants": [
+{ "name": "Muhammad Amir Sheh", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Sadik Shehu", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Abdulaziz Shehu", "isAlive": true, "imageUrl": "", "biography": "", "children": [] }
+]
+},
+"branch_yakubu_musa": {
+"id": "branch_yakubu_musa",
+"branchName": "Yakubu Musa",
+"isFirstSon": false,
+"imageUrl": "",
+"descendantsCount": 3,
+"descendants": [
+{ "name": "Usman Yakubu", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Musa Yakubu", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Muh'd Yakubu", "isAlive": true, "imageUrl": "", "biography": "", "children": [] }
+]
+},
+"branch_abdulaziz_musa": {
+"id": "branch_abdulaziz_musa",
+"branchName": "Abdulaziz Musa",
+"isFirstSon": false,
+"imageUrl": "",
+"descendantsCount": 4,
+"descendants": [
+{ "name": "Muhseen Abdulaziz", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Fatima Abdulaziz", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Najib Abdulaziz", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Maimuna Abdulaziz", "isAlive": true, "imageUrl": "", "biography": "", "children": [] }
+]
+},
+"branch_muhammad_garba": {
+"id": "branch_muhammad_garba",
+"branchName": "Muhammad Garba",
+"isFirstSon": false,
+"imageUrl": "",
+"descendantsCount": 4,
+"descendants": [
+{ "name": "Sa'adatu Muh'd", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Asma'u Muh'd", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Adamu Muh'd", "isAlive": true, "imageUrl": "", "biography": "", "children": [] },
+{ "name": "Muh'd Muhammad", "isAlive": true, "imageUrl": "", "biography": "", "children": [] }
+]
+},
+"branch_garba_musa_2": {
+"id": "branch_garba_musa_2",
+"branchName": "Garba Musa",
+"isFirstSon": false,
+"imageUrl": "",
+"descendantsCount": 1,
+"descendants": [
+{ "name": "Garba Musa", "isAlive": true, "imageUrl": "", "biography": "", "children": [] }
+]
+},
+"branch_hauwa_musa": {
+"id": "branch_hauwa_musa",
+"branchName": "Hauwa Musa",
+"isFirstSon": false,
+"imageUrl": "",
+"descendantsCount": 1,
+"descendants": [
+{ "name": "Hauwa Musa", "isAlive": true, "imageUrl": "", "biography": "", "children": [] }
+]
+}
+}
+}
