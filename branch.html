@@ -79,6 +79,7 @@
 
     <main class="flex-grow relative w-full">
         
+        <!-- Loading State -->
         <div id="loading-state" class="flex flex-col items-center justify-center min-h-[70vh]">
             <div class="relative w-16 h-16 mb-6">
                 <div class="absolute inset-0 border-4 border-gold-500/20 rounded-full"></div>
@@ -88,6 +89,7 @@
             <p class="text-xs text-gray-400 uppercase tracking-widest mt-2">Connecting to archive</p>
         </div>
 
+        <!-- Error State -->
         <div id="error-state" class="hidden flex-col items-center justify-center min-h-[70vh] px-6 text-center fade-in">
             <div class="w-20 h-20 rounded-full bg-red-50 border border-red-100 flex items-center justify-center text-red-500 mb-6 shadow-sm">
                 <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
@@ -97,6 +99,7 @@
             <a href="discover.html" class="px-8 py-3 bg-forest-900 text-parchment font-semibold text-sm uppercase tracking-widest rounded-sm hover:bg-gold-500 transition-colors shadow-md">Return to Directory</a>
         </div>
 
+        <!-- Dynamic Branch Content -->
         <div id="branch-content" class="hidden w-full fade-in">
             
             <!-- Cinematic Branch Hero -->
@@ -110,13 +113,13 @@
                     <div class="inline-block mb-8 relative">
                         <div class="absolute inset-0 bg-gold-500 rounded-full blur-xl opacity-20 animate-pulse"></div>
                         <div class="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-parchment shadow-2xl overflow-hidden relative z-10 bg-forest-900 mx-auto group">
-                            <img id="dynamic-head-image" src="assets/images/hero-family-placeholder.jpg" alt="Branch Head" class="w-full h-full object-cover grayscale transition duration-500 group-hover:grayscale-0">
+                            <img src="assets/images/hero-family-placeholder.jpg" alt="Branch Head" class="w-full h-full object-cover grayscale transition duration-500 group-hover:grayscale-0">
                         </div>
                     </div>
                     
                     <div class="flex items-center justify-center gap-4 mb-4">
                         <span class="h-px w-12 bg-gradient-to-r from-transparent to-gold-500"></span>
-                        <span class="text-gold-600 tracking-[0.3em] uppercase text-xs font-bold" id="dynamic-subtitle">Head of Family</span>
+                        <span class="text-gold-600 tracking-[0.3em] uppercase text-xs font-bold">Head of Family</span>
                         <span class="h-px w-12 bg-gradient-to-l from-transparent to-gold-500"></span>
                     </div>
                     
@@ -128,6 +131,7 @@
                 </div>
             </section>
 
+            <!-- Biography & Stat Section -->
             <section class="py-16 bg-white border-b border-gray-100 relative">
                 <div class="absolute top-0 left-1/2 -translate-x-1/2 w-px h-16 bg-gold-500/30"></div>
                 
@@ -141,7 +145,6 @@
                     
                     <!-- Stats Card -->
                     <div class="bg-parchment p-8 rounded-xl border border-gold-500/15 shadow-sm text-center relative overflow-hidden">
-                        <!-- Decorative corner accent -->
                         <div class="absolute top-0 right-0 w-16 h-16 bg-gold-500/5 rounded-bl-full"></div>
                         
                         <h3 class="font-serif text-2xl text-forest-900 mb-8 border-b border-gray-200 pb-4">Branch Statistics</h3>
@@ -163,10 +166,11 @@
                 </div>
             </section>
 
+            <!-- Descendants Grid -->
             <section class="py-24 px-6 lg:px-12 max-w-7xl mx-auto">
                 <div class="text-center mb-16">
                     <h2 class="font-serif text-4xl md:text-5xl text-forest-900 mb-4">The Lineage</h2>
-                    <p class="text-gray-500 uppercase tracking-[0.2em] text-xs font-bold" id="dynamic-descendants-title">Descendants of ...</p>
+                    <p class="text-gray-500 uppercase tracking-[0.2em] text-xs font-bold" id="dynamic-descendants-title">Descendants</p>
                 </div>
 
                 <div id="descendants-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -182,11 +186,13 @@
     <!-- Scripts -->
     <script type="module" src="js/components.js"></script>
     <script type="module">
-        import { DBService } from './js/db.js';
+        import { familySeedData } from './js/family-data.js';
 
-        document.addEventListener('DOMContentLoaded', async () => {
+        document.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
-            const branchId = urlParams.get('id');
+            // Parse ID as an integer since we are routing by array index from discover.html
+            const branchIdStr = urlParams.get('id');
+            const branchIndex = parseInt(branchIdStr, 10);
 
             const state = {
                 loading: document.getElementById('loading-state'),
@@ -194,7 +200,6 @@
                 content: document.getElementById('branch-content')
             };
 
-            // Switch view utility
             const showView = (viewKey) => {
                 state.loading.classList.add('hidden');
                 state.loading.classList.remove('flex');
@@ -213,31 +218,18 @@
                 }
             };
 
-            if (!branchId) {
+            if (branchIdStr === null || isNaN(branchIndex) || branchIndex < 0 || branchIndex >= familySeedData.branches.length) {
                 showView('error');
                 return;
             }
 
             try {
-                // Fetch all branches
-                const branchesResponse = await DBService.getBranches();
-                let branchData = null;
-
-                // Defensive check: Handle whether response is an Array or Object Map
-                if (Array.isArray(branchesResponse)) {
-                    branchData = branchesResponse.find(b => b.id === branchId);
-                } else if (typeof branchesResponse === 'object' && branchesResponse !== null) {
-                    branchData = branchesResponse[branchId] || Object.values(branchesResponse).find(b => b.id === branchId);
-                }
-
-                if (!branchData) {
-                    throw new Error("Branch data not found");
-                }
-
-                // Render the fetched data
-                renderBranchData(branchData);
+                // Fetch the branch directly from the provided local data map
+                const branchData = familySeedData.branches[branchIndex];
                 
-                // Show content
+                if (!branchData) throw new Error("Branch data null.");
+
+                renderBranchData(branchData);
                 showView('content');
 
             } catch (error) {
@@ -247,30 +239,15 @@
         });
 
         function renderBranchData(branch) {
-            // Update Document Meta
+            // Update Document Meta & Hero
             document.title = `${branch.branchName} Lineage | Abasaya Family Heritage`;
-
-            // Hero Section Updates
             document.getElementById('dynamic-branch-name').innerText = branch.branchName;
             document.getElementById('dynamic-descendants-title').innerText = `Descendants of ${branch.branchName}`;
-            
-            // Subtitle logic (First Son vs Head of Family)
-            if (branch.isFirstSon) {
-                document.getElementById('dynamic-subtitle').innerText = "The First Son";
-            }
-            
-            // Handle image with defensive fallback
-            const heroImage = document.getElementById('dynamic-head-image');
-            if (branch.imageUrl && branch.imageUrl.trim() !== '') {
-                heroImage.src = branch.imageUrl;
-            } else {
-                heroImage.src = 'assets/images/hero-family-placeholder.jpg';
-            }
 
             // Descendants Processing
             const grid = document.getElementById('descendants-grid');
             
-            // Safely default arrays to prevent crashes
+            // Defensively get descendants array
             const descendantsArray = branch.descendants || [];
             const totalChildren = descendantsArray.length;
             let totalGrandchildren = 0;
@@ -286,28 +263,25 @@
                     </div>`;
             } else {
                 grid.innerHTML = descendantsArray.map(child => {
-                    // Safe fallbacks for each child node
                     const cleanName = child.name || "Unknown";
-                    const isAlive = child.isAlive !== undefined ? child.isAlive : true;
                     const childrenList = child.children || [];
                     
-                    // Validation Badge
+                    // Source data validation badges ("(?)" and redacted "****")
                     const needsVerification = cleanName.includes('(?)');
-                    const verificationBadge = needsVerification 
-                        ? `<span class="ml-2 inline-flex items-center px-1.5 py-0.5 rounded text-[0.55rem] font-bold bg-orange-100 text-orange-800 border border-orange-200 uppercase tracking-widest align-middle shadow-sm">Pending</span>` 
-                        : '';
+                    const isRedacted = cleanName.includes('*****');
+                    
+                    let verificationBadge = '';
+                    if (needsVerification) {
+                        verificationBadge = `<span class="ml-2 inline-flex items-center px-1.5 py-0.5 rounded text-[0.55rem] font-bold bg-orange-100 text-orange-800 border border-orange-200 uppercase tracking-widest align-middle shadow-sm">Pending</span>`;
+                    } else if (isRedacted) {
+                        verificationBadge = `<span class="ml-2 inline-flex items-center px-1.5 py-0.5 rounded text-[0.55rem] font-bold bg-gray-200 text-gray-600 border border-gray-300 uppercase tracking-widest align-middle shadow-sm">Redacted</span>`;
+                    }
 
                     totalGrandchildren += childrenList.length;
-
-                    // Status Badge 
-                    const statusBadge = isAlive === false 
-                        ? `<span class="px-2.5 py-1 bg-gray-100 text-gray-500 text-[0.6rem] font-bold uppercase tracking-widest rounded-sm border border-gray-200">Late</span>`
-                        : `<span class="px-2.5 py-1 bg-green-50 text-forest-700 text-[0.6rem] font-bold uppercase tracking-widest rounded-sm border border-green-200/60">Alive</span>`;
                     
-                    // Grandchildren HTML - use columns if there are many to save vertical space
+                    // Grandchildren HTML - use CSS columns for large lists
                     let childrenHtml = `<p class="text-sm text-gray-400 italic font-light">No descendants recorded.</p>`;
                     if (childrenList.length > 0) {
-                        // If more than 5 grandchildren, split into 2 columns on small screens and up
                         const columnClass = childrenList.length > 5 ? 'sm:columns-2 gap-4' : '';
                         
                         childrenHtml = `
@@ -315,7 +289,6 @@
                                 ${childrenList.map(gc => {
                                     const safeGc = gc || "Unknown";
                                     const gcVerification = safeGc.includes('(?)') ? `<span class="ml-1 text-[0.5rem] font-bold text-orange-500 uppercase tracking-wider bg-orange-50 px-1 rounded">?</span>` : '';
-                                    // Wrap in a div inside li to prevent column breaks inside items
                                     return `<li class="break-inside-avoid text-gray-700">${safeGc} ${gcVerification}</li>`;
                                 }).join('')}
                             </ul>
@@ -330,11 +303,10 @@
                             <div class="flex justify-between items-start mb-6 pt-2">
                                 <div class="pr-4">
                                     <h3 class="font-serif text-2xl text-forest-900 font-semibold mb-1 leading-tight">
-                                        ${cleanName} ${verificationBadge}
+                                        ${cleanName.replace('(?)', '').trim()} ${verificationBadge}
                                     </h3>
                                     <p class="text-[0.65rem] uppercase tracking-[0.15em] text-gold-600 font-bold mt-2">2nd Generation</p>
                                 </div>
-                                <div class="flex-shrink-0">${statusBadge}</div>
                             </div>
                             
                             <div class="flex-grow bg-parchment rounded-lg p-5 border border-gold-500/10 shadow-inner">
@@ -349,6 +321,7 @@
                 }).join('');
             }
 
+            // Update DOM Stats
             document.getElementById('stat-children').innerText = totalChildren;
             document.getElementById('stat-grandchildren').innerText = totalGrandchildren;
         }
