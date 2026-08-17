@@ -1,4 +1,3 @@
-
 /**
  * UI Components (Web Components)
  * Maintains layout consistency across SPAs.
