@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>In Loving Memory | Abasaya Family Heritage</title>
+    <meta name="description" content="Honoring the ancestors of the Abasaya family.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        forest: { 900: '#062c22', 800: '#064e3b', 700: '#047857' },
+                        gold: { 400: '#eab308', 500: '#d4af37', 600: '#b8962e' },
+                        parchment: '#fdfbf7',
+                        charcoal: '#171717'
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Inter"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #fdfbf7; color: #171717; }
+        .hero-gradient { background: linear-gradient(180deg, rgba(6,44,34,0.03) 0%, rgba(253,251,247,1) 100%); }
+        .reveal { opacity: 0; transform: translateY(20px); transition: all 0.6s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        
+        /* Image zoom effect */
+        .hover-zoom img { transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+        .hover-zoom:hover img { transform: scale(1.05); }
+    </style>
+</head>
+<body class="font-sans antialiased min-h-screen flex flex-col overflow-x-hidden">
+
+    <app-header></app-header>
+
+    <main class="flex-grow w-full relative pt-32 pb-24">
+        
+        <section class="relative px-6 hero-gradient pb-20 border-b border-gold-500/10">
+            <div class="max-w-4xl mx-auto text-center reveal active">
+                <h1 class="font-serif text-5xl md:text-6xl text-forest-900 font-medium mb-8 leading-tight">In Loving Memory</h1>
+                
+                <div class="relative py-6">
+                    <span class="absolute top-0 left-1/2 -translate-x-1/2 w-px h-full bg-gold-500/30"></span>
+                    <blockquote class="relative bg-parchment py-2 px-6 inline-block z-10 text-xl md:text-2xl font-serif italic text-gray-500">
+                        "Verily we belong to Allah, and verily to Him do we return."
+                    </blockquote>
+                </div>
+                
+                <p class="text-gray-500 max-w-2xl mx-auto font-light leading-relaxed mt-6 text-sm uppercase tracking-widest">
+                    Honoring the lives, legacies, and enduring memories of the ancestors who paved our way.
+                </p>
+            </div>
+        </section>
+
+        <section class="max-w-7xl mx-auto px-6 lg:px-12 pt-16 relative z-10">
+            <div id="memorial-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-12">
+                <!-- Javascript will populate this based on family-data.js -->
+            </div>
+        </section>
+
+    </main>
+
+    <app-footer></app-footer>
+
+    <script type="module" src="js/components.js"></script>
+    <script type="module">
+        import { familySeedData } from './js/family-data.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const grid = document.getElementById('memorial-grid');
+            const memorials = familySeedData.memorials || [];
+
+            if (memorials.length === 0) {
+                grid.innerHTML = `<p class="col-span-full text-center text-gray-500 italic font-serif text-xl py-12">No memorial records found.</p>`;
+                return;
+            }
+
+            grid.innerHTML = memorials.map((name, index) => {
+                const delay = index * 150;
+                
+                // Fallback elegant placeholders based on index
+                const placeholderNum = (index % 3) + 1; // 1, 2, or 3
+                
+                return `
+                    <div class="bg-white rounded-sm shadow-[0_10px_40px_-10px_rgba(6,44,34,0.08)] border border-gray-100 overflow-hidden flex flex-col text-center hover:-translate-y-2 transition-transform duration-500 reveal active group" style="animation-delay: ${delay}ms;">
+                        
+                        <!-- Top Banner / Archival Frame -->
+                        <div class="h-32 bg-forest-900 relative flex justify-center hover-zoom">
+                            <!-- Background texture overlay -->
+                            <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPgo8cmVjdCB3aWR0aD0iOCIgaGVpZ2h0PSI4IiBmaWxsPSIjZmZmIj48L3JlY3Q+CjxwYXRoIGQ9Ik0wIDBMOCA4Wk04IDBMMCA4WiIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEiPjwvcGF0aD4KPC9zdmc+')]"></div>
+                            
+                            <!-- Circular Portrait Overlap -->
+                            <div class="absolute -bottom-16 w-32 h-32 rounded-full border-4 border-white shadow-xl overflow-hidden bg-gray-200 z-10 group-hover:border-gold-500 transition-colors duration-500">
+                                <img src="assets/images/memorial-placeholder-${placeholderNum}.jpg" onerror="this.src='assets/images/late-musa-ibrahim-placeholder.jpg'" alt="${name}" class="w-full h-full object-cover grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100">
+                            </div>
+                        </div>
+                        
+                        <!-- Text Content -->
+                        <div class="pt-20 pb-10 px-8 flex-grow flex flex-col justify-between relative bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPgo8cmVjdCB3aWR0aD0iOCIgaGVpZ2h0PSI4IiBmaWxsPSIjZmZmIj48L3JlY3Q+CjxwYXRoIGQ9Ik0wIDBMOCA4Wk04IDBMMCA4WiIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEiPjwvcGF0aD4KPC9zdmc+')]">
+                            <!-- Watermark Initial -->
+                            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[150px] font-serif text-gray-50 leading-none pointer-events-none select-none z-0">
+                                ${name.charAt(0)}
+                            </div>
+                            
+                            <div class="relative z-10">
+                                <h3 class="font-serif text-2xl font-bold text-forest-900 mb-2 leading-tight">${name.replace('(Abasaya)', '').trim()}</h3>
+                                ${name.includes('(Abasaya)') ? '<span class="block text-xs uppercase tracking-[0.2em] text-gold-600 font-bold mb-4">The Central Ancestor</span>' : '<span class="block text-xs uppercase tracking-[0.2em] text-gray-400 font-bold mb-4">Honored Ancestor</span>'}
+                                
+                                <p class="text-gray-500 text-sm italic font-serif leading-relaxed mb-8">
+                                    May Allah grant them Al-Jannatul Firdaus. Their legacy lives on through the generations they nurtured.
+                                </p>
+                            </div>
+                            
+                            <div class="relative z-10">
+                                <button class="w-full text-xs font-bold text-forest-900 uppercase tracking-widest border border-gray-200 rounded-sm py-3 hover:bg-gold-500 hover:text-forest-900 hover:border-gold-500 transition-all shadow-sm">
+                                    Read their story
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        });
+    </script>
+</body>
+</html>
