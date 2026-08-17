@@ -1,6 +1,6 @@
 /**
  * REALTIME DATABASE CONTROLLER
- * Handles Announcements, Newsletter Registration, and triggering Emails.
+ * Handles Stats, Branches, Announcements, and Emails safely.
  */
 
 import { ref, get, push, set, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
@@ -8,31 +8,45 @@ import { db, USE_LIVE_FIREBASE } from './firebase-config.js';
 import { familySeedData } from './family-data.js';
 
 export const DBService = {
-    // ... (Keep existing getBranches and getStats functions here for public pages)
+    
+    // --- PUBLIC DATA FETCHING --- //
+
+    async getStats() {
+        try {
+            if (USE_LIVE_FIREBASE && db) {
+                const statsRef = ref(db, 'statistics');
+                const snapshot = await get(statsRef);
+                if (snapshot.exists()) {
+                    return snapshot.val();
+                }
+            }
+        } catch (error) {
+            console.warn("Firebase stats fetch failed, safely falling back to local data.", error);
+        }
+        // Always fall back to local seed data
+        return familySeedData.stats;
+    },
+
     async getBranches() {
-        if (USE_LIVE_FIREBASE) {
-            const branchesRef = ref(db, 'branches');
-            const snapshot = await get(branchesRef);
-            return snapshot.exists() ? Object.values(snapshot.val()) : [];
+        try {
+            if (USE_LIVE_FIREBASE && db) {
+                const branchesRef = ref(db, 'branches');
+                const snapshot = await get(branchesRef);
+                if (snapshot.exists()) {
+                    return Object.values(snapshot.val());
+                }
+            }
+        } catch (error) {
+            console.warn("Firebase branches fetch failed, using local branches.", error);
         }
         return familySeedData.branches;
     },
 
-    async getStats() {
-        if (USE_LIVE_FIREBASE) {
-            const statsRef = ref(db, 'statistics');
-            const snapshot = await get(statsRef);
-            return snapshot.exists() ? snapshot.val() : familySeedData.stats;
-        }
-        return familySeedData.stats;
-    },
+    // --- ANNOUNCEMENTS & EMAILS --- //
 
-    /**
-     * REGISTER NEWSLETTER EMAIL (Public Landing Page)
-     */
     async registerEmail(fullName, branch, email) {
-        if (!USE_LIVE_FIREBASE) {
-            console.log("Mock Registration:", { fullName, branch, email });
+        if (!USE_LIVE_FIREBASE || !db) {
+            console.log("Mock Registration Success:", { fullName, branch, email });
             return true;
         }
         
@@ -49,16 +63,12 @@ export const DBService = {
         return true;
     },
 
-    /**
-     * POST ANNOUNCEMENT & TRIGGER EMAILS (Admin Only)
-     */
     async postAnnouncement(title, body, sendEmail) {
-        if (!USE_LIVE_FIREBASE) {
+        if (!USE_LIVE_FIREBASE || !db) {
             console.log("Mock Post Announcement:", { title, body, sendEmail });
             return true;
         }
 
-        // 1. Save the announcement to the public feed
         const announcementsRef = ref(db, 'announcements');
         const newAnnouncementRef = push(announcementsRef);
         
@@ -69,7 +79,6 @@ export const DBService = {
             timestamp: serverTimestamp()
         });
 
-        // 2. If email toggle is checked, queue emails for all subscribers
         if (sendEmail) {
             await this.triggerEmailBroadcast(title, body);
         }
@@ -77,21 +86,16 @@ export const DBService = {
         return true;
     },
 
-    /**
-     * INTERNAL: Fetches subscribers and formats them for Firebase Trigger Email Extension
-     */
     async triggerEmailBroadcast(title, bodyHtml) {
         try {
-            // Fetch all registered subscribers
             const subscribersRef = ref(db, 'subscribers');
             const snapshot = await get(subscribersRef);
             
             if (!snapshot.exists()) return;
 
             const subscribers = Object.values(snapshot.val());
-            const mailRef = ref(db, 'mail'); // The collection the Firebase Extension listens to
+            const mailRef = ref(db, 'mail'); 
 
-            // Create a mail document for each subscriber
             const promises = subscribers.map(sub => {
                 if (!sub.email) return Promise.resolve();
                 
@@ -111,10 +115,6 @@ export const DBService = {
                                     <div style="margin-top: 20px; margin-bottom: 20px;">
                                         ${bodyHtml.replace(/\n/g, '<br>')}
                                     </div>
-                                    <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
-                                    <p style="font-size: 12px; color: #888; text-align: center;">
-                                        You are receiving this because you registered on the Abasaya Family Heritage Portal.
-                                    </p>
                                 </div>
                             </div>
                         `
@@ -123,31 +123,31 @@ export const DBService = {
             });
 
             await Promise.all(promises);
-            console.log(`Successfully queued ${promises.length} emails to Firebase Mail Extension.`);
             
         } catch (error) {
             console.error("Failed to queue broadcast emails:", error);
-            throw error; // Propagate error so admin UI knows the email part failed
+            throw error; 
         }
     },
 
-    /**
-     * FETCH PAST ANNOUNCEMENTS (Admin & Public)
-     */
     async getAnnouncements() {
-        if (!USE_LIVE_FIREBASE) {
+        if (!USE_LIVE_FIREBASE || !db) {
             return [
-                { title: "Welcome to the New Abasaya Heritage Portal", body: "...", timestamp: Date.now(), emailed: false }
+                { title: "Welcome to the New Abasaya Heritage Portal", body: "The family administration is proud to launch the official digital archive. Family heads are encouraged to review their branch lineage and prepare historical photographs for the upcoming gallery integration phase.", timestamp: Date.now(), emailed: false }
             ];
         }
 
-        const announcementsRef = ref(db, 'announcements');
-        const snapshot = await get(announcementsRef);
-        
-        if (!snapshot.exists()) return [];
+        try {
+            const announcementsRef = ref(db, 'announcements');
+            const snapshot = await get(announcementsRef);
+            
+            if (!snapshot.exists()) return [];
 
-        // Convert object map to array and sort by newest first
-        const arr = Object.values(snapshot.val());
-        return arr.sort((a, b) => b.timestamp - a.timestamp);
+            const arr = Object.values(snapshot.val());
+            return arr.sort((a, b) => b.timestamp - a.timestamp);
+        } catch (error) {
+            console.error("Failed to fetch announcements", error);
+            return [];
+        }
     }
 };
