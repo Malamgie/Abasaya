@@ -1,101 +1,350 @@
+/**
+ * Abasaya Family Heritage - Seed Genealogy Dataset
+ * 
+ * SOURCE DATA RULE COMPLIANCE:
+ * - Exact spellings preserved.
+ * - Repeated names preserved.
+ * - (?) and ***** preserved.
+ * - Structural hierarchy exactly mirrors the provided original document.
+ */
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Family Portal | Abasaya Family Heritage</title>
-    <link rel="stylesheet" href="css/style.css">
-    <script type="module" src="js/components.js"></script>
-</head>
-<body class="font-sans antialiased text-charcoal bg-parchment min-h-screen flex flex-col">
-    
-    <app-header></app-header>
+export const familySeedData = {
+    source: "Abasaya Family Heritage supplied family-tree data",
+    verified: false,
+    stats: {
+        totalMembers: 310,
+        male: 180,
+        female: 130,
+        children: 22,
+        grandchildren: 125,
+        greatGrandchildren: 160,
+        deceasedIdentified: 3
+    },
+    centralAncestor: "Late Musa Ibrahim (Abasaya)",
+    memorials: [
+        "Late Musa Ibrahim (Abasaya)",
+        "Late Ibrahim Musa",
+        "Late Shehu Musa"
+    ],
+    // The structured branches according to the exact source list
+    branches: [
+        {
+            branchName: "Garba Musa",
+            descendants: [
+                { name: "Hauwa Garba", children: ["Shu'aibu Abdulrazaq", "Harira Abdulrazaq", "Yahaya Abdulrazaq", "Khadija Abdulrazaq", "Asma'u Abdulrazaq", "Rukayya Abdulrazaq", "Hauwa Abdulrazaq", "Kamal Muh'd Bashar", "Tauhid Muh'd Bashar"] },
+                { name: "Sa'adatu Garba", children: ["Abdulrahman Ja'afar", "Hauwa Ja'afar", "Asma'u Ja'afar", "Abubakar Ja'afar", "Salamatu Ja'afar"] },
+                { name: "Muhammad Garba", children: ["Ibrahim Muhammad", "Abdulmalik Muhammad", "Haruna Muhammad", "Abdullah Muhammad", "Abubakar Muhammad", "Musa Muhammad", "Alamin Muhammad"] },
+                { name: "Usman Garba", children: ["Abubakar Usman", "Al-amin Usman", "Asma'u Usman", "Umar Farouk Usman", "Asma'u Usman", "Abdullah Usman", "Ibrahim Usman"] },
+                { name: "Asma'u Garba", children: ["Nazir Sani", "Sadiq Sani", "Salimatu Sani", "Abdul Sani"] },
+                { name: "Fatima Garba", children: ["Abba Ado", "Umaima Ado", "Ummu-Salma Ado"] },
+                { name: "Muhammad Garba", children: ["Yahaya Muhammad", "Fatima Muhammad"] },
+                { name: "Musa Garba", children: ["Abubakar Musa", "Adris Musa", "Ahmad Musa", "Alamin Musa"] },
+                { name: "Fatima Garba", children: ["Fatima Usman", "Umar Usman", "Sadiq Usman", "Khadija Usman", "Sani Usman"] },
+                { name: "Ibrahim Garba", children: ["Muhammad Ibrahim", "Sulaiman Ibrahim"] },
+                { name: "Hafsat Garba", children: ["Abubakar Jabir", "Ahmad Jabir", "Abdul Jabir", "Khadija Jabir"] },
+                { name: "Zainab Garba", children: [] },
+                { name: "Muhammad Garba", children: ["Abubakar", "Isah Muhammad"] },
+                { name: "Salamatu Garba", children: ["Umar Yusuf", "Sunusi Yusuf", "Sadik Yusuf"] },
+                { name: "Maimuna Garba", children: ["Aisha Aliyu"] },
+                { name: "Fatima Garba", children: [] },
+                { name: "Musa Garba", children: [] },
+                { name: "Amina Garba", children: ["Yasir Ibrahim"] },
+                { name: "Sadiq Garba", children: [] },
+                { name: "Aliyu Garba", children: [] },
+                { name: "Saidu Garba", children: [] },
+                { name: "Fatima Garba", children: [] },
+                { name: "Aisha Garba", children: [] },
+                { name: "Hafsat Garba", children: [] }
+            ]
+        },
+        {
+            branchName: "Late Ibrahim Musa",
+            descendants: [
+                { name: "Musa Ibrahim", children: ["Ibrahim Musa", "Mufti Musa"] },
+                { name: "Bar'atu Ibrahim", children: ["Aisha Abdul"] },
+                { name: "Rukayya Ibrahim", children: [] },
+                { name: "Sadik Ibrahim", children: [] }
+            ]
+        },
+        {
+            branchName: "Yahaya Musa",
+            descendants: [
+                { name: "Asma'u Yahaya", children: ["Fatima Adamu", "Habiba Adamu"] },
+                { name: "Abdurrahman Yahaya", children: ["Hajara Abdurrahman", "Fatima Abdurrahman"] },
+                { name: "Isah Yahaya", children: [] },
+                { name: "Khadija Yahaya", children: [] },
+                { name: "Zainab Yahaya", children: ["Zainab Auwal", "Yahaya Auwal"] },
+                { name: "Saifullahi Yahaya", children: [] },
+                { name: "Nasir Yahaya", children: [] },
+                { name: "Sadiq Yahaya", children: [] },
+                { name: "Ummusalma Yahaya", children: [] },
+                { name: "Fatima Yahaya", children: [] },
+                { name: "Umar Yahaya", children: [] },
+                { name: "Adamu Yahaya", children: [] },
+                { name: "Asma'u Yahaya", children: [] },
+                { name: "Amina Yahaya", children: [] },
+                { name: "Hauwa'u Yahaya", children: [] }
+            ]
+        },
+        {
+            branchName: "Abdullahi Musa",
+            descendants: [
+                { name: "Ibrahim Abdullahi", children: [] },
+                { name: "Nabil Abdullahi", children: [] },
+                { name: "Amira Abdullahi", children: ["Farhan Huzaifa"] },
+                { name: "Usman Abdullahi", children: [] },
+                { name: "***** Abdullahi", children: [] },
+                { name: "Musa Abdullahi", children: [] },
+                { name: "Fatima Abdullahi", children: [] },
+                { name: "Muhammad Abdullahi", children: [] },
+                { name: "Aisha Abdullahi", children: [] },
+                { name: "Umar Abdullahi", children: [] },
+                { name: "***** Abdullahi", children: [] },
+                { name: "Adam Abdullahi", children: [] },
+                { name: "Maryam Abdullahi", children: [] },
+                { name: "Hafsat Abdullahi", children: [] }
+            ]
+        },
+        {
+            branchName: "Muhammad Inuwa Musa",
+            descendants: [
+                { name: "Sadik Muhammad", children: [] },
+                { name: "Shamsuddeen Muhammad", children: [] },
+                { name: "Fatima Muhammad", children: ["Asad Muhammad"] },
+                { name: "Rukayya Ibrahim (?)", children: [] }
+            ]
+        },
+        {
+            branchName: "Aishatu Musa",
+            descendants: [
+                { name: "Aisha Modibbo", children: ["Shahida Muh'd", "Shaheed Muh'd", "Sultana Muh'd", "Hanan Muh'd"] },
+                { name: "Yahaya Modibbo", children: ["Muhseen Yahaya", "Adil Yahaya", "Abdullahi Yahaya"] },
+                { name: "Rabi'atu Modibbo", children: ["Aisha Sani", "Adamu Sani", "Fatima Sani", "Muhammad Sani", "Abdulqadir Sani"] },
+                { name: "Bakisu Modibbo", children: [] },
+                { name: "Abubakar Abubakar", children: [] },
+                { name: "Harira Modibbo", children: [] },
+                { name: "Umar Modibbo", children: [] }
+            ]
+        },
+        {
+            branchName: "Lami Musa",
+            descendants: [
+                { name: "Aisha Abdullahi", children: ["Mufida Baffaji", "Husna Baffaji", "Salamatu Muh'd", "Fatima Muh'd"] },
+                { name: "Dantala Abdullahi", children: ["Abdullahi Muh'd", "Sani Muh'd", "Maryam Muh'd", "Sadiya Muh'd", "Adamu Muh'd", "Aisha Muh'd"] },
+                { name: "Sadiya Abdullahi", children: ["Jafar Yusuf", "Zainab Yusuf"] },
+                { name: "Zainab Abdullahi", children: [] }
+            ]
+        },
+        {
+            branchName: "Hassana Musa",
+            descendants: [
+                { name: "Amina Abba", children: ["Abubakar Musa", "Haruna Musa", "Hajara Musa", "Hajara Musa", "Fatima Musa", "Khadija Musa", "Fatima Musa"] },
+                { name: "Aliyu Abba", children: ["Afnan Aliyu", "Fatima Aliyu"] },
+                { name: "Musa Abba", children: ["Abba Musa", "Aisha Musa"] },
+                { name: "Abubakar Abba", children: [] },
+                { name: "Abdullahi Abba", children: [] },
+                { name: "Sadiqu Abba", children: [] },
+                { name: "Khalipha Abba", children: [] },
+                { name: "Habiba Abba", children: [] }
+            ]
+        },
+        {
+            branchName: "Fatima Musa",
+            descendants: [
+                { name: "Jamaluddeen Baba", children: ["Adamu Jamaluddeen", "Auwalu Jamaluddeen", "Fatima Jamaluddeen"] },
+                { name: "Zaharaddeen Baba", children: ["Abdullahi Zaharaddeen", "Fatima Zaharaddeen", "Muhamoud Zaharaddeen"] },
+                { name: "Nasiruddeen Baba (?)", children: ["Abdurraman Nasir", "Maryam Nasir"] },
+                { name: "Nuruddeen Baba", children: [] },
+                { name: "Shehu Baba", children: ["Fatima Shehu"] },
+                { name: "Musa Baba", children: [] },
+                { name: "Zainab Baba", children: ["Fatima Sani", "Jawad Sani"] },
+                { name: "Abubakar Baba", children: [] },
+                { name: "Amina Baba", children: [] },
+                { name: "Khadija Baba", children: [] },
+                { name: "Aisha Baba", children: [] },
+                { name: "Halima Baba", children: [] }
+            ]
+        },
+        {
+            branchName: "Khadija Musa",
+            descendants: [
+                { name: "Bashar Baba", children: ["Sauban Bashar", "Shehu Bashar", "Khadija Bashar"] },
+                { name: "Jamila Idris", children: [] },
+                { name: "Muhammad Idris", children: [] }
+            ]
+        },
+        {
+            branchName: "Sani Musa",
+            descendants: [
+                { name: "Sadiq Sani", children: [] },
+                { name: "Abdulkadir Sani", children: [] },
+                { name: "Fatima Sani", children: [] },
+                { name: "Abdurrahman Sani", children: [] },
+                { name: "Shurahabil Sani", children: [] },
+                { name: "Usman Sani", children: [] },
+                { name: "Suleiman Sani", children: [] },
+                { name: "Hassan Sani", children: [] },
+                { name: "Raihan Sani", children: [] },
+                { name: "Yahaya Sani", children: [] },
+                { name: "Ibrahim Sani", children: [] },
+                { name: "Musa Sani", children: [] },
+                { name: "Ibrahim Sani", children: [] },
+                { name: "Yusuf Sani", children: [] },
+                { name: "Ismail Sani", children: [] },
+                { name: "Umar Sani", children: [] },
+                { name: "Isah Sani", children: [] },
+                { name: "Alamin Sani", children: [] }
+            ]
+        },
+        {
+            branchName: "Danjuma Musa",
+            descendants: [
+                { name: "Maryam Danjuma", children: [] },
+                { name: "Ibrahim Danjuma", children: [] },
+                { name: "Fatima Danjuma", children: [] }
+            ]
+        },
+        {
+            branchName: "Abdullahi Musa — SECOND SUPPLIED ENTRY",
+            descendants: [
+                { name: "Aisha Abdullahi", children: [] },
+                { name: "Abdurrahman Abdullahi", children: [] },
+                { name: "Musa Abdullahi", children: [] },
+                { name: "Zinatu Abdullahi", children: [] }
+            ]
+        },
+        {
+            branchName: "Jibril Musa",
+            descendants: [
+                { name: "Fatima Jibril", children: [] },
+                { name: "Nasir Jibril", children: [] },
+                { name: "Ibrahim Jibril", children: [] },
+                { name: "Abubakar Jibril", children: [] },
+                { name: "Aisha Jibril", children: [] },
+                { name: "Sadiq Jibril", children: [] },
+                { name: "Aliyu Jibril", children: [] },
+                { name: "Hauwa Jibril", children: [] }
+            ]
+        },
+        {
+            branchName: "Fatima Musa — SECOND SUPPLIED ENTRY",
+            descendants: [
+                { name: "Umar Danladi", children: ["Musaddiq Umar"] },
+                { name: "Aisha Bamanga", children: ["Aisha Adamu", "Abdulaziz Adamu", "Khalifa Adamu"] },
+                { name: "Abdul Bamanga", children: ["Fatima Abdul", "Ahmad Abdul"] },
+                { name: "Sadiq Bamanga", children: [] },
+                { name: "Usman Bamanga", children: [] },
+                { name: "Umar Bamanga", children: [] },
+                { name: "Zainab Bamanga", children: [] },
+                { name: "Alamin Bamanga", children: [] },
+                { name: "Aliyu Bamanga", children: [] }
+            ]
+        },
+        {
+            branchName: "Aishatu Musa — SECOND SUPPLIED ENTRY",
+            descendants: [
+                { name: "Zainab Abdullahi", children: ["Abdullahi Abba"] },
+                { name: "Hussain Abdullahi", children: [] },
+                { name: "Hussain Abdullahi", children: [] },
+                { name: "Nabila Abdullahi", children: [] },
+                { name: "Hafsat Abdullahi", children: [] },
+                { name: "Asma'u Abdullahi", children: [] },
+                { name: "Ahmad Abdullahi", children: [] },
+                { name: "Zainab Abdullahi", children: [] }
+            ]
+        },
+        {
+            branchName: "Maimuna Musa",
+            descendants: [
+                { name: "Muhktar Shehu", children: [] },
+                { name: "Khalifa Shehu", children: [] },
+                { name: "Muh'd Shehu", children: [] },
+                { name: "Aisha Shehu", children: [] }
+            ]
+        },
+        {
+            branchName: "Late Shehu Musa",
+            descendants: [
+                { name: "Muhammad Amir Sheh", children: [] },
+                { name: "Sadik Shehu", children: [] },
+                { name: "Abdulaziz Shehu", children: [] }
+            ]
+        },
+        {
+            branchName: "Yakubu Musa",
+            descendants: [
+                { name: "Usman Yakubu", children: [] },
+                { name: "Musa Yakubu", children: [] },
+                { name: "Muh'd Yakubu", children: [] }
+            ]
+        },
+        {
+            branchName: "Abdulaziz Musa",
+            descendants: [
+                { name: "Muhseen Abdulaziz", children: [] },
+                { name: "Fatima Abdulaziz", children: [] },
+                { name: "Najib Abdulaziz", children: [] },
+                { name: "Maimuna Abdulaziz", children: [] }
+            ]
+        },
+        {
+            branchName: "Muhammad Garba",
+            descendants: [
+                { name: "Sa'adatu Muh'd", children: [] },
+                { name: "Asma'u Muh'd", children: [] },
+                { name: "Adamu Muh'd", children: [] },
+                { name: "Muh'd Muhammad", children: [] }
+            ]
+        },
+        {
+            branchName: "Garba Musa — ADDITIONAL SUPPLIED ENTRY",
+            descendants: [
+                { name: "Garba Musa", children: [] }
+            ]
+        },
+        {
+            branchName: "Hauwa Musa",
+            descendants: [
+                { name: "Hauwa Musa", children: [] }
+            ]
+        }
+    ]
+};
 
-    <main class="flex-grow flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-[url('assets/images/hero-family-placeholder.jpg')] bg-cover bg-center relative">
-        <div class="absolute inset-0 bg-forest/90 mix-blend-multiply"></div>
-        
-        <div class="max-w-md w-full space-y-8 bg-white p-8 sm:p-10 rounded-xl shadow-2xl relative z-10 border border-gold/20">
-            <div>
-                <h2 class="mt-2 text-center text-3xl font-serif font-extrabold text-forest">
-                    Family Portal
-                </h2>
-                <p class="mt-2 text-center text-sm text-gray-600">
-                    Secure access for members of the Abasaya family.
-                </p>
-            </div>
-            
-            <form id="login-form" class="mt-8 space-y-6" onsubmit="event.preventDefault();">
-                <div id="error-message" class="hidden bg-red-50 text-red-600 text-sm p-3 rounded border border-red-200 text-center"></div>
-                
-                <div class="rounded-md shadow-sm -space-y-px">
-                    <div>
-                        <label for="username" class="sr-only">Username</label>
-                        <input id="username" name="username" type="text" required class="appearance-none rounded-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-forest focus:border-forest focus:z-10 sm:text-sm" placeholder="Username">
-                    </div>
-                    <div>
-                        <label for="password" class="sr-only">Password</label>
-                        <input id="password" name="password" type="password" required class="appearance-none rounded-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-forest focus:border-forest focus:z-10 sm:text-sm" placeholder="Password">
-                    </div>
-                </div>
+// Utility to flatten data into database-friendly ID references
+export function generateFlatDatabase(seedData) {
+    let flatPeople = [];
+    let idCounter = 1;
 
-                <div>
-                    <button type="submit" id="submit-btn" class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-bold rounded-md text-forest bg-gold hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold shadow-md transition-all">
-                        <span class="absolute left-0 inset-y-0 flex items-center pl-3">
-                            <svg class="h-5 w-5 text-forest/70 group-hover:text-forest" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
-                            </svg>
-                        </span>
-                        Sign in
-                    </button>
-                </div>
-            </form>
-            
-            <div class="mt-4 text-center text-xs text-gray-400">
-                <p>This system will be updated to Firebase Authentication.</p>
-            </div>
-        </div>
-    </main>
+    // Helper to generate IDs
+    const makeId = (name, prefix) => `person_${prefix}_${idCounter++}`;
 
-    <app-footer></app-footer>
+    seedData.branches.forEach((branch, bIdx) => {
+        let branchKey = `branch_${bIdx}`;
+        branch.descendants.forEach((person) => {
+            let pId = makeId(person.name, 'p');
+            flatPeople.push({
+                id: pId,
+                name: person.name,
+                branchName: branch.branchName,
+                generation: 2, // Assuming top level descendants under branch are gen 2 from Musa Ibrahim
+                verified: false
+            });
 
-    <script type="module">
-        import { AuthService } from './js/firebase-service.js';
-
-        const form = document.getElementById('login-form');
-        const btn = document.getElementById('submit-btn');
-        const errorDiv = document.getElementById('error-message');
-
-        form.addEventListener('submit', async () => {
-            const u = document.getElementById('username').value;
-            const p = document.getElementById('password').value;
-            
-            btn.innerHTML = 'Authenticating...';
-            btn.disabled = true;
-            errorDiv.classList.add('hidden');
-
-            try {
-                // Simulate slight network delay for premium feel
-                await new Promise(r => setTimeout(r, 800));
-                
-                await AuthService.login(u, p);
-                
-                // Success - redirect to a future admin dashboard, or back to home
-                btn.innerHTML = 'Success';
-                btn.classList.replace('bg-gold', 'bg-green-500');
-                btn.classList.replace('text-forest', 'text-white');
-                
-                setTimeout(() => {
-                    window.location.href = 'index.html'; // In future phase, redirect to /admin/
-                }, 500);
-
-            } catch (err) {
-                errorDiv.innerText = err.message || "Invalid credentials. Please try again.";
-                errorDiv.classList.remove('hidden');
-                btn.innerHTML = 'Sign in';
-                btn.disabled = false;
+            if (person.children && person.children.length > 0) {
+                person.children.forEach((childName) => {
+                    flatPeople.push({
+                        id: makeId(childName, 'c'),
+                        name: childName,
+                        branchName: branch.branchName,
+                        parentId: pId,
+                        generation: 3,
+                        verified: false
+                    });
+                });
             }
         });
-    </script>
-</body>
-</html>
+    });
+
+    return flatPeople;
+}
