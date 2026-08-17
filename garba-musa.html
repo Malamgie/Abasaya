@@ -1,1 +1,209 @@
 
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garba Musa Branch | Abasaya Family Heritage</title>
+    <meta name="description" content="The official archive and family tree for the descendants of Garba Musa, the first son of Late Musa Ibrahim.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        forest: { 900: '#062c22', 800: '#064e3b', 700: '#047857' },
+                        gold: { 400: '#eab308', 500: '#d4af37', 600: '#b8962e' },
+                        parchment: '#fdfbf7',
+                        charcoal: '#171717'
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Inter"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #fdfbf7; color: #171717; }
+        .hero-gradient {
+            background: linear-gradient(180deg, rgba(6,44,34,0.02) 0%, rgba(253,251,247,1) 100%);
+        }
+        .child-card {
+            transition: all 0.3s ease;
+        }
+        .child-card:hover {
+            box-shadow: 0 10px 30px -10px rgba(212, 175, 55, 0.2);
+            border-color: rgba(212, 175, 55, 0.5);
+        }
+        .grandchild-list li::before {
+            content: "•";
+            color: #d4af37;
+            font-weight: bold;
+            display: inline-block; 
+            width: 1em;
+            margin-left: -1em;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased min-h-screen flex flex-col">
+
+    <app-header></app-header>
+
+    <main class="flex-grow">
+        
+        <!-- Cinematic Branch Hero -->
+        <section class="relative pt-40 pb-20 px-6 hero-gradient border-b border-gold-500/20">
+            <div class="max-w-4xl mx-auto text-center relative z-10">
+                <div class="inline-block mb-6 relative">
+                    <div class="absolute inset-0 bg-gold-500 rounded-full blur-md opacity-30 animate-pulse"></div>
+                    <div class="w-40 h-40 md:w-48 md:h-48 rounded-full border-4 border-gold-500 shadow-2xl overflow-hidden relative z-10 bg-forest-900 mx-auto">
+                        <img id="head-image" src="assets/images/hero-family-placeholder.jpg" alt="Garba Musa" class="w-full h-full object-cover">
+                    </div>
+                </div>
+                
+                <div class="flex items-center justify-center gap-3 mb-4">
+                    <span class="h-px w-8 bg-gold-500"></span>
+                    <span class="text-gold-600 tracking-[0.4em] uppercase text-xs font-bold">The First Son</span>
+                    <span class="h-px w-8 bg-gold-500"></span>
+                </div>
+                
+                <h1 class="font-serif text-5xl md:text-7xl text-forest-900 font-medium mb-6">Garba Musa</h1>
+                
+                <p class="text-gray-600 max-w-2xl mx-auto font-light leading-relaxed text-lg">
+                    As the first son of Late Musa Ibrahim, the branch of Garba Musa stands as a foundational pillar of the Abasaya heritage. His descendants carry forward the primary legacy of our shared ancestry.
+                </p>
+            </div>
+        </section>
+
+        <!-- Biograhpy & Stats Area -->
+        <section class="py-16 bg-white border-b border-gray-100">
+            <div class="max-w-5xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
+                <div class="md:col-span-2 prose prose-lg font-light text-gray-600 leading-loose">
+                    <p class="first-letter:text-6xl first-letter:font-serif first-letter:text-forest-800 first-letter:mr-2 first-letter:float-left">
+                        The history of the Garba Musa branch is deeply intertwined with the origins of the Abasaya legacy. As a leader within the family, his life set a precedent of unity, strength, and devotion. This space is reserved for a comprehensive verified biography detailing his life's achievements, his character, and the profound impact he had on his extensive family.
+                    </p>
+                </div>
+                <div class="bg-parchment p-8 rounded-lg border border-gold-500/10 shadow-sm text-center">
+                    <h3 class="font-serif text-2xl text-forest-900 mb-6">Branch Statistics</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <p class="text-4xl font-serif text-gold-600" id="stat-children">24</p>
+                            <p class="text-xs uppercase tracking-widest text-gray-500 mt-1">Direct Children</p>
+                        </div>
+                        <div class="w-12 h-px bg-gray-200 mx-auto"></div>
+                        <div>
+                            <p class="text-4xl font-serif text-forest-800" id="stat-grandchildren">--</p>
+                            <p class="text-xs uppercase tracking-widest text-gray-500 mt-1">Grandchildren</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Descendants Grid Section -->
+        <section class="py-24 px-6 lg:px-12 max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-4xl md:text-5xl text-forest-900 mb-4">The Lineage</h2>
+                <p class="text-gray-500 uppercase tracking-widest text-sm font-semibold">Descendants of Garba Musa</p>
+            </div>
+
+            <div id="descendants-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+                <!-- Loading State -->
+                <div class="col-span-full text-center py-12">
+                    <p class="text-gray-400 font-serif italic text-lg">Retrieving descendants...</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <app-footer></app-footer>
+
+    <!-- Scripts -->
+    <script type="module" src="js/components.js"></script>
+    <script type="module">
+        import { DBService } from './js/db.js';
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const grid = document.getElementById('descendants-grid');
+            const gcStat = document.getElementById('stat-grandchildren');
+
+            try {
+                // Fetch all branches and isolate Garba Musa
+                const branches = await DBService.getBranches();
+                const branchData = branches.find(b => b.id === 'branch_garba_musa');
+
+                if (!branchData || !branchData.descendants) {
+                    grid.innerHTML = `<p class="col-span-full text-center text-red-500">Data for this branch is currently unavailable.</p>`;
+                    return;
+                }
+
+                let totalGrandchildren = 0;
+
+                grid.innerHTML = branchData.descendants.map((child, index) => {
+                    const hasChildren = child.children && child.children.length > 0;
+                    if (hasChildren) totalGrandchildren += child.children.length;
+
+                    // Status Badge Logic (Alive vs Deceased - visually distinct but respectful)
+                    const statusBadge = child.isAlive === false 
+                        ? `<span class="px-2 py-1 bg-gray-200 text-gray-600 text-[0.6rem] font-bold uppercase tracking-wider rounded-sm border border-gray-300">Late</span>`
+                        : `<span class="px-2 py-1 bg-green-50 text-forest-700 text-[0.6rem] font-bold uppercase tracking-wider rounded-sm border border-green-200">Alive</span>`;
+                    
+                    // Grandchildren List HTML
+                    let childrenHtml = `<p class="text-sm text-gray-400 italic">No descendants recorded.</p>`;
+                    if (hasChildren) {
+                        childrenHtml = `
+                            <ul class="grandchild-list pl-4 space-y-2 text-sm text-gray-600 font-light">
+                                ${child.children.map(gc => `<li>${gc}</li>`).join('')}
+                            </ul>
+                        `;
+                    }
+
+                    return `
+                        <div class="child-card bg-white border border-gray-200 rounded-xl p-6 relative overflow-hidden flex flex-col h-full">
+                            <!-- Top subtle border accent -->
+                            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-forest-800 to-gold-500"></div>
+                            
+                            <div class="flex justify-between items-start mb-6 pt-2">
+                                <div>
+                                    <h3 class="font-serif text-2xl text-forest-900 font-semibold mb-1">${child.name}</h3>
+                                    <p class="text-[0.7rem] uppercase tracking-widest text-gold-600 font-semibold">2nd Generation</p>
+                                </div>
+                                <div>${statusBadge}</div>
+                            </div>
+                            
+                            <div class="flex-grow bg-parchment rounded-lg p-5 border border-gray-100">
+                                <h4 class="text-xs uppercase tracking-widest text-forest-800 font-bold mb-4 flex items-center">
+                                    <svg class="w-4 h-4 mr-2 text-gold-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                    Children (${hasChildren ? child.children.length : 0})
+                                </h4>
+                                ${childrenHtml}
+                            </div>
+                            
+                            <!-- Future Admin Edit Hook -->
+                            <div class="mt-4 pt-4 border-t border-gray-100 flex justify-end">
+                                <span class="text-[0.65rem] text-gray-400 uppercase tracking-widest">ID: ${child.name.replace(/\s+/g, '-').toLowerCase()}</span>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                // Update the total grandchildren statistic dynamically
+                gcStat.innerText = totalGrandchildren;
+
+            } catch (error) {
+                console.error("Failed to load descendants:", error);
+                grid.innerHTML = `<p class="col-span-full text-center text-red-500 font-serif italic">Error retrieving branch data.</p>`;
+            }
+        });
+    </script>
+</body>
+</html>
