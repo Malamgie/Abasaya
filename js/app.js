@@ -69,3 +69,21 @@ function animateValue(obj, start, end, duration) {
     };
     window.requestAnimationFrame(step);
 }
+
+// Initialize the main Firebase Application
+const app = initializeApp(firebaseConfig);
+
+// Initialize and export Authentication and Realtime Database services
+let auth, db;
+try {
+    auth = getAuth(app);
+    // Only initialize DB if URL is somewhat valid, otherwise Firebase throws a fatal module error
+    if (firebaseConfig.databaseURL && !firebaseConfig.databaseURL.includes('YOUR_DATABASE')) {
+        db = getDatabase(app);
+    }
+} catch (e) {
+    console.warn("Firebase services not fully initialized. Using local seed data.", e.message);
+}
+
+export { auth, db };
+
