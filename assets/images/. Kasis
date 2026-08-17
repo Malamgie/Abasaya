@@ -1,1 +1,0 @@
-const imageUrl = `${branch.branchName}.jpg`;
