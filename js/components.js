@@ -84,5 +84,54 @@ class AppFooter extends HTMLElement {
     }
 }
 
+class AchievementCard extends HTMLElement {
+    connectedCallback() {
+        const imageSrc = this.getAttribute('image-src') || 'https://placehold.co/600x400/062c22/d4af37?text=Milestone';
+        const category = this.getAttribute('category') || 'Milestone';
+        const title = this.getAttribute('title') || 'Achievement Title';
+        const recipient = this.getAttribute('recipient') || 'Family Member';
+        const year = this.getAttribute('year') || '2026';
+        const description = this.innerHTML || 'Detailed description of this milestone is pending archive synchronization.';
+
+        this.innerHTML = `
+            <article class="bg-white rounded-sm border border-gray-100 overflow-hidden shadow-[0_10px_40px_-10px_rgba(6,44,34,0.05)] group hover:-translate-y-2 transition-transform duration-500 flex flex-col h-full reveal active">
+                <!-- Image Header -->
+                <div class="relative h-64 overflow-hidden bg-forest-900">
+                    <img src="${imageSrc}" alt="${title}" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" onerror="this.src='https://placehold.co/600x400/062c22/d4af37?text=Milestone'">
+                    <div class="absolute inset-0 bg-gradient-to-t from-forest-900 via-forest-900/60 to-transparent opacity-90 group-hover:opacity-75 transition-opacity duration-500"></div>
+                    
+                    <div class="absolute bottom-0 left-0 p-6 w-full z-10">
+                        <span class="inline-block px-3 py-1 bg-gold-500 text-forest-900 text-[0.65rem] font-bold uppercase tracking-widest rounded-sm mb-3 shadow-md backdrop-blur-md">${category}</span>
+                        <h3 class="font-serif text-2xl md:text-3xl text-parchment leading-tight group-hover:text-gold-400 transition-colors duration-300 drop-shadow-md">${title}</h3>
+                    </div>
+                </div>
+                
+                <!-- Content Body -->
+                <div class="p-6 md:p-8 flex-grow flex flex-col relative bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPgo8cmVjdCB3aWR0aD0iOCIgaGVpZ2h0PSI4IiBmaWxsPSIjZmZmIj48L3JlY3Q+CjxwYXRoIGQ9Ik0wIDBMOCA4Wk04IDBMMCA4WiIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEiPjwvcGF0aD4KPC9zdmc+')]">
+                    <!-- Subtle background emblem -->
+                    <div class="absolute top-4 right-4 text-forest-900/5 font-serif text-6xl leading-none pointer-events-none select-none italic">A</div>
+                    
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-gray-100 pb-4 mb-4 relative z-10 gap-2">
+                        <span class="text-sm font-semibold text-forest-900 uppercase tracking-widest">${recipient}</span>
+                        <span class="text-xs font-bold text-gray-400 font-serif italic bg-gray-50 px-3 py-1 rounded-full border border-gray-100 w-max">${year}</span>
+                    </div>
+                    
+                    <div class="text-gray-600 font-light text-sm leading-relaxed flex-grow relative z-10">
+                        ${description}
+                    </div>
+                    
+                    <div class="mt-6 pt-4 border-t border-gray-50 flex justify-end relative z-10">
+                        <button class="text-[0.65rem] font-bold text-gold-600 uppercase tracking-widest hover:text-forest-900 transition-colors flex items-center group-hover:translate-x-1 duration-300" onclick="console.log('Details modal feature pending')">
+                            Read Full Story
+                            <svg class="w-3 h-3 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </button>
+                    </div>
+                </div>
+            </article>
+        `;
+    }
+}
+
 customElements.define('app-header', AppHeader);
 customElements.define('app-footer', AppFooter);
+customElements.define('achievement-card', AchievementCard);
