@@ -103,7 +103,7 @@ export const familySeedData = {
                 { name: "Sadik Muhammad", children: [] },
                 { name: "Shamsuddeen Muhammad", children: [] },
                 { name: "Fatima Muhammad", children: ["Asad Muhammad"] },
-                { name: "Rukayya Ibrahim (?)", children: [] }
+                { name: "Abbah Muhammad", children: [] }
             ]
         },
         {
