@@ -1,1 +1,507 @@
 
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal | Abasaya Family Heritage</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        forest: { 900: '#062c22', 800: '#064e3b', 700: '#047857' },
+                        gold: { 400: '#eab308', 500: '#d4af37', 600: '#b8962e' },
+                        parchment: '#fdfbf7',
+                        charcoal: '#171717'
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Inter"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #fdfbf7; color: #171717; }
+        
+        /* Custom Scrollbar for Admin Panel */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 10px; }
+        
+        .nav-link.active {
+            background-color: rgba(212, 175, 55, 0.1);
+            color: #d4af37;
+            border-left: 3px solid #d4af37;
+        }
+        .nav-link {
+            border-left: 3px solid transparent;
+            transition: all 0.2s ease;
+        }
+        .view-section {
+            display: none;
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+        .view-section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Modal Backdrop Blur */
+        #edit-modal {
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased h-screen overflow-hidden flex bg-parchment">
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-forest-900 text-parchment flex flex-col border-r border-gold-500/20 z-20">
+        <div class="p-6 border-b border-white/10">
+            <h1 class="font-serif text-2xl text-parchment leading-none">ABASAYA</h1>
+            <p class="text-[0.55rem] uppercase tracking-[0.25em] text-gold-500 mt-1">Heritage Admin</p>
+        </div>
+        
+        <nav class="flex-1 overflow-y-auto py-4 space-y-1">
+            <button data-target="dashboard" class="nav-link active w-full flex items-center px-6 py-3 text-sm font-medium hover:bg-forest-800 transition-colors text-gray-300">
+                <svg class="w-5 h-5 mr-3 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                Dashboard
+            </button>
+            <button data-target="people" class="nav-link w-full flex items-center px-6 py-3 text-sm font-medium hover:bg-forest-800 transition-colors text-gray-300">
+                <svg class="w-5 h-5 mr-3 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                People Directory
+            </button>
+            <button data-target="branches" class="nav-link w-full flex items-center px-6 py-3 text-sm font-medium hover:bg-forest-800 transition-colors text-gray-300">
+                <svg class="w-5 h-5 mr-3 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path></svg>
+                Branches
+            </button>
+            <button data-target="relationships" class="nav-link w-full flex items-center px-6 py-3 text-sm font-medium hover:bg-forest-800 transition-colors text-gray-300">
+                <svg class="w-5 h-5 mr-3 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
+                Relationships
+            </button>
+            
+            <div class="px-6 py-4">
+                <span class="text-[0.65rem] uppercase tracking-widest text-gold-600 font-bold">Content</span>
+            </div>
+            
+            <button data-target="events" class="nav-link w-full flex items-center px-6 py-3 text-sm font-medium hover:bg-forest-800 transition-colors text-gray-300">
+                <svg class="w-5 h-5 mr-3 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                Events
+            </button>
+            <button data-target="gallery" class="nav-link w-full flex items-center px-6 py-3 text-sm font-medium hover:bg-forest-800 transition-colors text-gray-300">
+                <svg class="w-5 h-5 mr-3 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                Gallery
+            </button>
+            <button data-target="announcements" class="nav-link w-full flex items-center px-6 py-3 text-sm font-medium hover:bg-forest-800 transition-colors text-gray-300">
+                <svg class="w-5 h-5 mr-3 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path></svg>
+                Announcements
+            </button>
+            
+            <div class="px-6 py-4">
+                <span class="text-[0.65rem] uppercase tracking-widest text-gold-600 font-bold">System</span>
+            </div>
+            
+            <button data-target="corrections" class="nav-link w-full flex items-center px-6 py-3 text-sm font-medium hover:bg-forest-800 transition-colors text-gray-300">
+                <svg class="w-5 h-5 mr-3 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                Verification Requests
+            </button>
+            <button data-target="users" class="nav-link w-full flex items-center px-6 py-3 text-sm font-medium hover:bg-forest-800 transition-colors text-gray-300">
+                <svg class="w-5 h-5 mr-3 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                Portal Users
+            </button>
+        </nav>
+        
+        <div class="p-6 border-t border-white/10">
+            <button id="logout-btn" class="flex items-center text-sm font-medium text-gray-400 hover:text-white transition-colors w-full">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                Sign Out
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="flex-1 flex flex-col h-screen overflow-hidden">
+        
+        <!-- Topbar -->
+        <header class="h-20 bg-white border-b border-gray-100 px-8 flex items-center justify-between flex-shrink-0 shadow-sm z-10">
+            <h2 class="font-serif text-2xl text-forest-900 font-semibold" id="page-title">Dashboard Overview</h2>
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="text-xs font-semibold text-gold-600 uppercase tracking-widest hover:text-forest-900 transition-colors">View Live Site</a>
+                <div class="w-px h-6 bg-gray-200"></div>
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full bg-forest-900 text-gold-500 flex items-center justify-center font-serif font-bold text-sm">A</div>
+                    <span id="admin-email" class="text-sm font-medium text-gray-600">Loading...</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Scrollable Area -->
+        <main class="flex-1 overflow-y-auto p-8 relative">
+            
+            <!-- VIEW: DASHBOARD -->
+            <div id="view-dashboard" class="view-section active max-w-6xl mx-auto">
+                <div class="mb-8">
+                    <p class="text-sm text-gray-500 uppercase tracking-widest font-semibold mb-2">Welcome to the Registry</p>
+                    <h3 class="font-serif text-4xl text-forest-900">Abasaya Family Statistics</h3>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                    <div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-10 h-10 rounded-full bg-forest-50 flex items-center justify-center text-forest-700">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                            </div>
+                            <h4 class="text-sm font-medium text-gray-500 uppercase tracking-wider">Total Indexed</h4>
+                        </div>
+                        <p class="text-4xl font-serif text-forest-900" id="dash-total">...</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-10 h-10 rounded-full bg-gold-50 flex items-center justify-center text-gold-600">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                            </div>
+                            <h4 class="text-sm font-medium text-gray-500 uppercase tracking-wider">Family Branches</h4>
+                        </div>
+                        <p class="text-4xl font-serif text-forest-900" id="dash-branches">...</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-600">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
+                            </div>
+                            <h4 class="text-sm font-medium text-gray-500 uppercase tracking-wider">Honored Deceased</h4>
+                        </div>
+                        <p class="text-4xl font-serif text-forest-900" id="dash-deceased">...</p>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl border border-gray-100 shadow-sm">
+                    <h3 class="font-serif text-2xl text-forest-900 mb-2">System Integrity Policy</h3>
+                    <p class="text-gray-600 font-light mb-4">As an administrator of the Abasaya digital archive, you are bound by the strict data preservation rules of this platform.</p>
+                    <ul class="list-disc list-inside text-sm text-gray-500 space-y-2 font-light">
+                        <li>Family members cannot be deleted to prevent fracturing the hierarchical tree.</li>
+                        <li>Unverified entities marked with "(?)" must remain until official confirmation.</li>
+                        <li>Duplicate names should not be merged unless confirmed as the same individual.</li>
+                        <li>You may update biographies, portrait URLs, and status (Living/Late) via the People Directory.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- VIEW: PEOPLE (CORE CRUD) -->
+            <div id="view-people" class="view-section max-w-6xl mx-auto">
+                <div class="flex justify-between items-end mb-8">
+                    <div>
+                        <p class="text-sm text-gray-500 uppercase tracking-widest font-semibold mb-2">Metadata Management</p>
+                        <h3 class="font-serif text-4xl text-forest-900">People Directory</h3>
+                    </div>
+                    
+                    <div class="w-72">
+                        <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Select Branch Lineage</label>
+                        <select id="branch-selector" class="w-full bg-white border border-gray-200 text-gray-700 py-3 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-transparent font-sans shadow-sm">
+                            <option value="">Loading branches...</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-gray-50 border-b border-gray-200 text-xs uppercase tracking-widest text-gray-500">
+                                <th class="py-4 px-6 font-semibold">Name</th>
+                                <th class="py-4 px-6 font-semibold">Status</th>
+                                <th class="py-4 px-6 font-semibold">Children</th>
+                                <th class="py-4 px-6 font-semibold text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="people-table-body" class="divide-y divide-gray-100">
+                            <tr>
+                                <td colspan="4" class="py-8 text-center text-gray-400 font-serif italic">Please select a branch to view members.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- VIEW: PLACEHOLDER (For out of scope sections) -->
+            <div id="view-placeholder" class="view-section h-full flex flex-col items-center justify-center text-center max-w-2xl mx-auto">
+                <div class="w-20 h-20 bg-parchment border-2 border-gold-500/30 rounded-full flex items-center justify-center text-gold-500 mb-6">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                </div>
+                <h3 class="font-serif text-3xl text-forest-900 mb-3" id="placeholder-title">Module Pending</h3>
+                <p class="text-gray-500 font-light text-lg">This administrative module is currently locked or pending integration with the Firebase backend structure. Return to the People Directory to manage member metadata.</p>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- EDIT MODAL (Strictly enforced update rules) -->
+    <div id="edit-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden bg-forest-900/40">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-lg overflow-hidden transform transition-all scale-95 opacity-0" id="modal-content">
+            
+            <div class="px-8 py-6 border-b border-gray-100 flex justify-between items-center bg-parchment">
+                <div>
+                    <h3 class="font-serif text-2xl text-forest-900 font-semibold" id="edit-name">Member Name</h3>
+                    <p class="text-[0.65rem] uppercase tracking-widest text-gold-600 font-bold mt-1" id="edit-id">ID: ...</p>
+                </div>
+                <button type="button" id="close-modal" class="text-gray-400 hover:text-forest-900 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            
+            <form id="edit-form" class="p-8 space-y-6">
+                <input type="hidden" id="edit-branch-id">
+                <input type="hidden" id="edit-member-index">
+                
+                <div>
+                    <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Life Status</label>
+                    <div class="flex gap-4">
+                        <label class="flex items-center p-3 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-50 flex-1 transition-colors">
+                            <input type="radio" name="isAlive" value="true" class="text-forest-700 focus:ring-forest-700 mr-3">
+                            <span class="text-sm font-medium text-gray-700">Living</span>
+                        </label>
+                        <label class="flex items-center p-3 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-50 flex-1 transition-colors">
+                            <input type="radio" name="isAlive" value="false" class="text-gray-500 focus:ring-gray-500 mr-3">
+                            <span class="text-sm font-medium text-gray-700">Late (Deceased)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Portrait URL (Firebase Storage / External)</label>
+                    <input type="url" id="edit-image-url" placeholder="https://..." class="w-full bg-parchment border border-gray-200 text-gray-900 py-3 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-gold-500 font-sans shadow-sm text-sm">
+                    <p class="text-[0.65rem] text-gray-400 mt-2">Provides the image source for the public directory.</p>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Verified Biography</label>
+                    <textarea id="edit-bio" rows="4" placeholder="Enter historical context..." class="w-full bg-parchment border border-gray-200 text-gray-900 py-3 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-gold-500 font-sans shadow-sm text-sm resize-none"></textarea>
+                </div>
+
+                <div class="pt-4 flex justify-end gap-3 border-t border-gray-100">
+                    <button type="button" id="cancel-modal" class="px-5 py-2.5 text-sm font-semibold text-gray-600 hover:bg-gray-100 rounded-md transition-colors">Cancel</button>
+                    <button type="submit" id="save-btn" class="px-6 py-2.5 text-sm font-bold text-forest-900 bg-gold-500 hover:bg-gold-400 rounded-md shadow-md transition-all">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module">
+        import { AuthService } from './js/auth.js';
+        import { DBService } from './js/db.js';
+
+        // State
+        let currentBranches = [];
+        let currentSelectedBranch = null;
+
+        // Ensure user is authenticated before revealing admin data
+        AuthService.onStateChange(user => {
+            if (!user) {
+                // Not authenticated, bounce back to portal
+                window.location.href = 'portal.html';
+            } else {
+                document.getElementById('admin-email').innerText = user.email || 'Admin';
+                initDashboard();
+            }
+        });
+
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            AuthService.logout();
+        });
+
+        // Routing Logic
+        const navLinks = document.querySelectorAll('.nav-link');
+        const viewSections = document.querySelectorAll('.view-section');
+        const pageTitle = document.getElementById('page-title');
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                navLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+                
+                const target = link.getAttribute('data-target');
+                viewSections.forEach(v => v.classList.remove('active'));
+                
+                // Update Title
+                pageTitle.innerText = link.innerText.trim();
+
+                if (target === 'dashboard') {
+                    document.getElementById('view-dashboard').classList.add('active');
+                } else if (target === 'people') {
+                    document.getElementById('view-people').classList.add('active');
+                } else {
+                    // Show placeholder for pending modules
+                    const placeholder = document.getElementById('view-placeholder');
+                    document.getElementById('placeholder-title').innerText = `${link.innerText.trim()} Module`;
+                    placeholder.classList.add('active');
+                }
+            });
+        });
+
+        // Initialize Data
+        async function initDashboard() {
+            try {
+                const stats = await DBService.getStats();
+                document.getElementById('dash-total').innerText = stats.totalMembers || '--';
+                document.getElementById('dash-deceased').innerText = stats.deceasedIdentified || '--';
+                
+                currentBranches = await DBService.getBranches();
+                document.getElementById('dash-branches').innerText = currentBranches.length;
+
+                populateBranchSelector();
+            } catch (error) {
+                console.error("Failed to load admin data:", error);
+            }
+        }
+
+        // People Directory Logic
+        const branchSelector = document.getElementById('branch-selector');
+        const tableBody = document.getElementById('people-table-body');
+
+        function populateBranchSelector() {
+            branchSelector.innerHTML = `<option value="">-- Select a Branch --</option>` + 
+                currentBranches.map(b => `<option value="${b.id}">${b.branchName}</option>`).join('');
+            
+            branchSelector.addEventListener('change', (e) => {
+                const branchId = e.target.value;
+                if (!branchId) {
+                    tableBody.innerHTML = `<tr><td colspan="4" class="py-8 text-center text-gray-400 font-serif italic">Please select a branch to view members.</td></tr>`;
+                    return;
+                }
+                currentSelectedBranch = currentBranches.find(b => b.id === branchId);
+                renderPeopleTable();
+            });
+        }
+
+        function renderPeopleTable() {
+            if (!currentSelectedBranch || !currentSelectedBranch.descendants) return;
+            
+            tableBody.innerHTML = currentSelectedBranch.descendants.map((person, index) => {
+                const statusBadge = person.isAlive === false 
+                    ? `<span class="px-2 py-1 bg-gray-100 text-gray-600 text-[0.65rem] font-bold uppercase tracking-wider rounded-sm">Late</span>`
+                    : `<span class="px-2 py-1 bg-green-50 text-forest-700 text-[0.65rem] font-bold uppercase tracking-wider rounded-sm border border-green-100">Alive</span>`;
+                
+                const childrenCount = person.children ? person.children.length : 0;
+                
+                // Using array index as a pseudo-ID for the mock data setup. In real RTDB, this would be the node key.
+                return `
+                    <tr class="hover:bg-gray-50 transition-colors group">
+                        <td class="py-4 px-6">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 rounded-full bg-forest-900 text-gold-500 flex items-center justify-center font-serif text-sm mr-3">
+                                    ${person.name.charAt(0)}
+                                </div>
+                                <span class="font-medium text-gray-900">${person.name}</span>
+                            </div>
+                        </td>
+                        <td class="py-4 px-6">${statusBadge}</td>
+                        <td class="py-4 px-6 text-sm text-gray-500">${childrenCount} recorded</td>
+                        <td class="py-4 px-6 text-right">
+                            <button onclick="window.openEditModal(${index})" class="text-xs font-semibold text-gold-600 uppercase tracking-widest hover:text-forest-900 transition-colors">Edit Meta</button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // Modal Logic
+        const modal = document.getElementById('edit-modal');
+        const modalContent = document.getElementById('modal-content');
+        const editForm = document.getElementById('edit-form');
+        
+        window.openEditModal = function(memberIndex) {
+            const person = currentSelectedBranch.descendants[memberIndex];
+            
+            document.getElementById('edit-name').innerText = person.name;
+            document.getElementById('edit-id').innerText = `BR: ${currentSelectedBranch.id} | IDX: ${memberIndex}`;
+            
+            // Populate Form
+            document.getElementById('edit-branch-id').value = currentSelectedBranch.id;
+            document.getElementById('edit-member-index').value = memberIndex;
+            document.getElementById('edit-image-url').value = person.imageUrl || '';
+            document.getElementById('edit-bio').value = person.biography || '';
+            
+            // Radio buttons
+            if (person.isAlive === false) {
+                document.querySelector('input[name="isAlive"][value="false"]').checked = true;
+            } else {
+                document.querySelector('input[name="isAlive"][value="true"]').checked = true;
+            }
+
+            // Show Modal
+            modal.classList.remove('hidden');
+            // Trigger animation
+            setTimeout(() => {
+                modalContent.classList.remove('scale-95', 'opacity-0');
+                modalContent.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        };
+
+        function closeModal() {
+            modalContent.classList.remove('scale-100', 'opacity-100');
+            modalContent.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                editForm.reset();
+            }, 200); // match transition duration
+        }
+
+        document.getElementById('close-modal').addEventListener('click', closeModal);
+        document.getElementById('cancel-modal').addEventListener('click', closeModal);
+
+        editForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('save-btn');
+            btn.innerText = "Saving...";
+            btn.disabled = true;
+            
+            const branchId = document.getElementById('edit-branch-id').value;
+            const memberIndex = document.getElementById('edit-member-index').value; // Used as ID
+            
+            const isAlive = document.querySelector('input[name="isAlive"]:checked').value === 'true';
+            const imageUrl = document.getElementById('edit-image-url').value;
+            const biography = document.getElementById('edit-bio').value;
+
+            try {
+                // Call DB Service (which strictly enforces allowed fields)
+                await DBService.updateMemberMetadata(branchId, memberIndex, {
+                    isAlive,
+                    imageUrl,
+                    biography
+                });
+
+                // Update local state for immediate UI reflection
+                currentSelectedBranch.descendants[memberIndex].isAlive = isAlive;
+                currentSelectedBranch.descendants[memberIndex].imageUrl = imageUrl;
+                currentSelectedBranch.descendants[memberIndex].biography = biography;
+                
+                renderPeopleTable();
+                closeModal();
+            } catch (error) {
+                console.error("Update failed", error);
+                alert("Failed to update metadata. Ensure Firebase is connected.");
+            } finally {
+                btn.innerText = "Save Changes";
+                btn.disabled = false;
+            }
+        });
+
+    </script>
+</body>
+  </html>
