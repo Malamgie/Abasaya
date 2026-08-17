@@ -1,6 +1,5 @@
-
 /**
- * AUTHENTICATION CONTROLLER
+ * REAL FIREBASE AUTHENTICATION CONTROLLER
  * Handles Admin login, logout, and session state.
  */
 
@@ -9,24 +8,26 @@ import { auth, USE_LIVE_FIREBASE } from './firebase-config.js';
 
 export const AuthService = {
     /**
-     * Authenticate an Admin User
+     * Authenticate an Admin User using Firebase Auth
      */
     async login(email, password) {
         if (!USE_LIVE_FIREBASE) {
-            console.warn("Firebase is disabled. Using local mock login.");
-            if (email === "admin@abasaya.family" && password === "000940") {
-                sessionStorage.setItem("mock_admin", "true");
-                return { uid: "mock_admin_123", email: email };
-            }
-            throw new Error("Invalid mock credentials.");
+            throw new Error("System Error: Firebase is not enabled in firebase-config.js. Cannot authenticate.");
         }
 
         try {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             return userCredential.user;
         } catch (error) {
-            console.error("Login Failed:", error.message);
-            throw error;
+            console.error("Firebase Auth Failed:", error.code, error.message);
+            // Translate common Firebase errors into user-friendly messages
+            if (error.code === 'auth/invalid-credential' || error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+                throw new Error("Invalid admin credentials. Please try again.");
+            }
+            if (error.code === 'auth/too-many-requests') {
+                throw new Error("Too many failed attempts. Please try again later.");
+            }
+            throw new Error("Authentication failed. Please check your connection.");
         }
     },
 
@@ -34,24 +35,21 @@ export const AuthService = {
      * Sign out current Admin
      */
     async logout() {
-        if (!USE_LIVE_FIREBASE) {
-            sessionStorage.removeItem("mock_admin");
-            window.location.href = "index.html";
-            return;
+        if (USE_LIVE_FIREBASE) {
+            await signOut(auth);
         }
-        await signOut(auth);
-        window.location.href = "index.html";
+        window.location.href = "portal.html";
     },
 
     /**
      * Listen for auth state changes (used to protect admin routes)
      */
     onStateChange(callback) {
-        if (!USE_LIVE_FIREBASE) {
-            const isMockAdmin = sessionStorage.getItem("mock_admin") === "true";
-            callback(isMockAdmin ? { uid: "mock_admin", email: "admin@abasaya.family" } : null);
-            return;
+        if (USE_LIVE_FIREBASE) {
+            onAuthStateChanged(auth, callback);
+        } else {
+            // If Firebase is off, immediately return null (unauthenticated)
+            callback(null);
         }
-        onAuthStateChanged(auth, callback);
     }
 };
