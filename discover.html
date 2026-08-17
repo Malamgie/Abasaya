@@ -106,7 +106,7 @@
                     ? `<div class="absolute top-0 right-0 transform translate-x-2 -translate-y-2 bg-gold-500 text-forest-900 text-[0.65rem] font-bold uppercase tracking-widest py-1 px-3 rounded-sm shadow-md z-10">First Son</div>` 
                     : '';
                 
-const imageUrl = `assets/images/${branch.branchName}.jpg`;
+                const imageUrl = `assets/images/${branch.branchName}.jpg`;
                 // Calculate total children for this specific branch
                 const directChildrenCount = branch.descendants ? branch.descendants.length : 0;
                 const delay = (index % 6) * 100; // Staggered animation delay
