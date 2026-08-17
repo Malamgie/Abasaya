@@ -32,4 +32,4 @@ export const db = getDatabase(app);
  * Set this to `true` ONLY after you have pasted your real Firebase credentials above.
  * When `false`, the UI will gracefully fall back to `js/family-data.js` and block admin login.
  */
-export const USE_LIVE_FIREBASE = false;
+export const USE_LIVE_FIREBASE = true;
