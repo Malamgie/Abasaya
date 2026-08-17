@@ -1,12 +1,4 @@
-/**
- * Abasaya Family Heritage - Seed Genealogy Dataset
- * 
- * SOURCE DATA RULE COMPLIANCE:
- * - Exact spellings preserved.
- * - Repeated names preserved.
- * - (?) and ***** preserved.
- * - Structural hierarchy exactly mirrors the provided original document.
- */
+
 
 export const familySeedData = {
     source: "Abasaya Family Heritage supplied family-tree data",
@@ -33,12 +25,12 @@ export const familySeedData = {
             descendants: [
                 { name: "Hauwa Garba", children: ["Shu'aibu Abdulrazaq", "Harira Abdulrazaq", "Yahaya Abdulrazaq", "Khadija Abdulrazaq", "Asma'u Abdulrazaq", "Rukayya Abdulrazaq", "Hauwa Abdulrazaq", "Kamal Muh'd Bashar", "Tauhid Muh'd Bashar"] },
                 { name: "Sa'adatu Garba", children: ["Abdulrahman Ja'afar", "Hauwa Ja'afar", "Asma'u Ja'afar", "Abubakar Ja'afar", "Salamatu Ja'afar"] },
-                { name: "Muhammad Garba", children: ["Ibrahim Muhammad", "Abdulmalik Muhammad", "Haruna Muhammad", "Abdullah Muhammad", "Abubakar Muhammad", "Musa Muhammad", "Alamin Muhammad"] },
+                { name: "Muhammad Garba", children: ["Ibrahim Muhammad", "Abdulmalik Muhammad", "Harira Muhammad", "Abdullah Muhammad", "Abubakar Muhammad", "Musa Muhammad", "Alamin Muhammad"] },
                 { name: "Usman Garba", children: ["Abubakar Usman", "Al-amin Usman", "Asma'u Usman", "Umar Farouk Usman", "Asma'u Usman", "Abdullah Usman", "Ibrahim Usman"] },
                 { name: "Asma'u Garba", children: ["Nazir Sani", "Sadiq Sani", "Salimatu Sani", "Abdul Sani"] },
                 { name: "Fatima Garba", children: ["Abba Ado", "Umaima Ado", "Ummu-Salma Ado"] },
                 { name: "Muhammad Garba", children: ["Yahaya Muhammad", "Fatima Muhammad"] },
-                { name: "Musa Garba", children: ["Abubakar Musa", "Adris Musa", "Ahmad Musa", "Alamin Musa"] },
+                { name: "Musa Garba", children: ["Abubakar Musa", "Idris Musa", "Ahmad Musa", "Alamin Musa"] },
                 { name: "Fatima Garba", children: ["Fatima Usman", "Umar Usman", "Sadiq Usman", "Khadija Usman", "Sani Usman"] },
                 { name: "Ibrahim Garba", children: ["Muhammad Ibrahim", "Sulaiman Ibrahim"] },
                 { name: "Hafsat Garba", children: ["Abubakar Jabir", "Ahmad Jabir", "Abdul Jabir", "Khadija Jabir"] },
