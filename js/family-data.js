@@ -120,8 +120,7 @@ export const familySeedData = {
                 { name: "Aisha Modibbo", children: ["Shahida Muh'd", "Shaheed Muh'd", "Sultana Muh'd", "Hanan Muh'd"] },
                 { name: "Yahaya Modibbo", children: ["Muhseen Yahaya", "Adil Yahaya", "Abdullahi Yahaya"] },
                 { name: "Rabi'atu Modibbo", children: ["Aisha Sani", "Adamu Sani", "Fatima Sani", "Muhammad Sani", "Abdulqadir Sani"] },
-                { name: "Bakisu Modibbo", children: [] },
-                { name: "Abubakar Abubakar", children: [] },
+                { name: "Bakisu Modibbo", children: ["Abubakar Abubakar"] },
                 { name: "Harira Modibbo", children: [] },
                 { name: "Umar Modibbo", children: [] }
             ]
