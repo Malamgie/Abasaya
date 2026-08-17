@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events & Gatherings | Abasaya Family Heritage</title>
+    <meta name="description" content="Upcoming official events, reunions, and gatherings for the Abasaya family.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        forest: { 900: '#062c22', 800: '#064e3b', 700: '#047857' },
+                        gold: { 400: '#eab308', 500: '#d4af37', 600: '#b8962e' },
+                        parchment: '#fdfbf7',
+                        charcoal: '#171717'
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Inter"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #fdfbf7; color: #171717; }
+        .hero-gradient { background: linear-gradient(180deg, rgba(6,44,34,0.03) 0%, rgba(253,251,247,1) 100%); }
+    </style>
+</head>
+<body class="font-sans antialiased min-h-screen flex flex-col overflow-x-hidden">
+
+    <app-header></app-header>
+
+    <main class="flex-grow w-full relative pt-32 pb-24">
+        
+        <section class="relative px-6 hero-gradient border-b border-gold-500/10 pb-16 mb-16">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="font-serif text-5xl md:text-6xl text-forest-900 font-medium mb-6 leading-tight">Upcoming Gatherings</h1>
+                <p class="text-gray-600 max-w-2xl mx-auto font-light leading-relaxed text-lg">
+                    Official family reunions, meetings, and important gatherings organized by the administration.
+                </p>
+            </div>
+        </section>
+
+        <section class="max-w-4xl mx-auto px-6 lg:px-12 relative z-10">
+            
+            <div class="space-y-8">
+                
+                <!-- Placeholder Event 1 (Featured) -->
+                <article class="bg-white rounded-sm shadow-[0_10px_40px_-10px_rgba(6,44,34,0.08)] border border-gray-100 overflow-hidden flex flex-col sm:flex-row group transition-all hover:shadow-xl hover:border-gold-500/30">
+                    <!-- Calendar Block -->
+                    <div class="bg-forest-900 text-parchment p-8 sm:w-48 flex flex-col items-center justify-center border-b sm:border-b-0 sm:border-r border-gold-500/20">
+                        <span class="text-gold-500 text-xs font-bold uppercase tracking-widest mb-2">TBD</span>
+                        <span class="font-serif text-6xl leading-none">--</span>
+                        <span class="text-gray-400 text-sm uppercase tracking-wider mt-2">2026/2027</span>
+                    </div>
+                    
+                    <!-- Content Block -->
+                    <div class="p-8 sm:p-10 flex-grow relative">
+                        <div class="absolute top-0 right-0 bg-gold-500 text-forest-900 text-[0.6rem] font-bold uppercase tracking-widest py-1 px-4 rounded-bl-sm">Pending</div>
+                        
+                        <h3 class="font-serif text-3xl text-forest-900 font-semibold mb-3 group-hover:text-gold-600 transition-colors">Annual Family Reunion</h3>
+                        
+                        <div class="flex items-center text-sm text-gray-500 mb-6 font-medium">
+                            <svg class="w-4 h-4 mr-2 text-gold-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            Location to be announced
+                        </div>
+                        
+                        <p class="text-gray-600 font-light leading-relaxed mb-6">
+                            Details for the upcoming grand family gathering will be finalized and posted here by the planning committee. Members are encouraged to register their emails to receive direct notification once the venue and dates are confirmed.
+                        </p>
+                        
+                        <button class="inline-flex items-center text-xs font-bold text-forest-900 uppercase tracking-widest hover:text-gold-600 transition-colors border-b-2 border-transparent hover:border-gold-600 pb-1" disabled>
+                            Details Pending
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Placeholder Event 2 (Past/Smaller) -->
+                <article class="bg-parchment rounded-sm shadow-sm border border-gray-200 overflow-hidden flex flex-col sm:flex-row group opacity-75">
+                    <div class="bg-gray-100 text-gray-400 p-6 sm:w-40 flex flex-col items-center justify-center border-b sm:border-b-0 sm:border-r border-gray-200">
+                        <span class="text-xs font-bold uppercase tracking-widest mb-1">Archived</span>
+                        <svg class="w-8 h-8 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    </div>
+                    
+                    <div class="p-6 sm:p-8 flex-grow">
+                        <h3 class="font-serif text-2xl text-gray-600 font-semibold mb-2">Historical Assembly Placeholder</h3>
+                        <div class="flex items-center text-xs text-gray-400 mb-4 font-medium uppercase tracking-wider">
+                            Kirfi Local Government
+                        </div>
+                        <p class="text-gray-500 font-light text-sm leading-relaxed">
+                            This section will eventually house the archive of past family gatherings and important meetings.
+                        </p>
+                    </div>
+                </article>
+
+            </div>
+            
+        </section>
+
+    </main>
+
+    <app-footer></app-footer>
+    <script type="module" src="js/components.js"></script>
+</body>
+</html>
