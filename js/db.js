@@ -1,4 +1,3 @@
-
 /**
  * REALTIME DATABASE CONTROLLER
  * Strictly enforces data integrity rules. 
@@ -17,7 +16,8 @@ export const DBService = {
         if (USE_LIVE_FIREBASE) {
             const branchesRef = ref(db, 'branches');
             const snapshot = await get(branchesRef);
-            return snapshot.exists() ? snapshot.val() : [];
+            // Convert Firebase Object dictionary back into an Array for the UI to map over
+            return snapshot.exists() ? Object.values(snapshot.val()) : [];
         }
         return familySeedData.branches;
     },
