@@ -1,51 +1,70 @@
+/**
+ * PUBLIC UI LOGIC
+ * Handles Landing Page Animations and Stats Fetching
+ */
 
-import { FamilyService } from './firebase-service.js';
+import { DBService } from './db.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
-    // 1. Initialize Animated Counters for Statistics on the Homepage
-    const statCounters = document.querySelectorAll('.stat-counter');
-    if (statCounters.length > 0) {
-        try {
-            const stats = await FamilyService.getStatistics();
-            
-            // Map the DOM elements to the data keys
-            const mapKeys = {
-                'totalMembers': stats.totalMembers,
-                'male': stats.male,
-                'female': stats.female,
-                'children': stats.children,
-                'grandchildren': stats.grandchildren,
-                'greatGrandchildren': stats.greatGrandchildren
-            };
-
-            statCounters.forEach(counter => {
-                const statKey = counter.dataset.stat;
-                const targetVal = mapKeys[statKey];
-                if (targetVal !== undefined) {
-                    animateValue(counter, 0, targetVal, 1500);
-                }
-            });
-        } catch (e) {
-            console.error("Failed to load statistics", e);
-        }
-    }
-
-    // Initialize Image Placeholders global fallback
-    document.querySelectorAll('img').forEach(img => {
-        img.addEventListener('error', function() {
-            this.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 800 400'%3E%3Crect fill='%23e5e7eb' width='800' height='400'/%3E%3Ctext fill='%239ca3af' font-family='sans-serif' font-size='24' dy='10.5' font-weight='bold' x='50%25' y='50%25' text-anchor='middle'%3EImage Not Found%3C/text%3E%3C/svg%3E";
-        });
-    });
+    initScrollAnimations();
+    await initStatistics();
 });
 
+function initScrollAnimations() {
+    const reveals = document.querySelectorAll('.reveal');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    reveals.forEach(el => observer.observe(el));
+    
+    // Trigger on load for elements already in viewport (like Hero)
+    setTimeout(() => {
+        reveals.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight) {
+                el.classList.add('active');
+            }
+        });
+    }, 100);
+}
+
+async function initStatistics() {
+    const counters = document.querySelectorAll('.stat-counter');
+    if (counters.length === 0) return;
+
+    try {
+        const stats = await DBService.getStats();
+        
+        counters.forEach(counter => {
+            const key = counter.getAttribute('data-stat');
+            if (stats[key] !== undefined) {
+                animateValue(counter, 0, stats[key], 2000);
+            }
+        });
+    } catch (e) {
+        console.error("Failed to load family statistics", e);
+    }
+}
+
+// Cinematic number counter animation
 function animateValue(obj, start, end, duration) {
     let startTimestamp = null;
     const step = (timestamp) => {
         if (!startTimestamp) startTimestamp = timestamp;
         const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-        obj.innerHTML = Math.floor(progress * (end - start) + start);
+        // easeOutQuart curve
+        const easeProgress = 1 - Math.pow(1 - progress, 4);
+        obj.innerHTML = Math.floor(easeProgress * (end - start) + start);
         if (progress < 1) {
             window.requestAnimationFrame(step);
+        } else {
+            obj.innerHTML = end; // Ensure exact final value
         }
     };
     window.requestAnimationFrame(step);
