@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
@@ -100,7 +99,7 @@
                 }
 
                 grid.innerHTML = branches.map((branch, index) => {
-                    // Determine the SPA link (For now, route Garba Musa to his specific HTML, others to a generic or placeholder)
+                    // Route Garba Musa to his specific bespoke HTML, all others to the dynamic branch.html router
                     const linkUrl = branch.id === 'branch_garba_musa' ? 'garba-musa.html' : `branch.html?id=${branch.id}`;
                     
                     // First Son visual indicator
