@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hall of Excellence | Abasaya Family Heritage</title>
+    <meta name="description" content="Celebrating the milestones, academic success, and professional contributions of the Abasaya family members.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        forest: { 900: '#062c22', 800: '#064e3b', 700: '#047857' },
+                        gold: { 400: '#eab308', 500: '#d4af37', 600: '#b8962e' },
+                        parchment: '#fdfbf7',
+                        charcoal: '#171717'
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Inter"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Premium UI Flourishes */
+        body { background-color: #fdfbf7; color: #171717; }
+        .hero-gradient { background: linear-gradient(180deg, rgba(6,44,34,0.03) 0%, rgba(253,251,247,1) 100%); }
+        
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #fdfbf7; }
+        ::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 10px; }
+    </style>
+</head>
+<body class="font-sans antialiased min-h-screen flex flex-col overflow-x-hidden">
+
+    <app-header></app-header>
+
+    <main class="flex-grow w-full relative pt-32 pb-24">
+        
+        <section class="relative px-6 hero-gradient border-b border-gold-500/10 pb-20 mb-16">
+            <!-- Background Decorative Element -->
+            <div class="absolute top-10 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gold-500/5 rounded-[100%] blur-3xl pointer-events-none"></div>
+
+            <div class="max-w-4xl mx-auto text-center reveal active relative z-10">
+                <div class="inline-flex items-center justify-center gap-4 mb-6">
+                    <span class="h-px w-12 bg-gradient-to-r from-transparent to-gold-500"></span>
+                    <span class="text-gold-600 tracking-[0.3em] uppercase text-xs font-bold">Hall of Excellence</span>
+                    <span class="h-px w-12 bg-gradient-to-l from-transparent to-gold-500"></span>
+                </div>
+                
+                <h1 class="font-serif text-5xl md:text-6xl lg:text-7xl text-forest-900 font-medium mb-8 leading-tight">Family Achievements</h1>
+                
+                <p class="text-gray-600 max-w-2xl mx-auto font-light leading-relaxed text-lg mb-10">
+                    Celebrating the dedication, scholarly success, and professional milestones of the Abasaya family. Our legacy continues to thrive through the remarkable contributions of our members.
+                </p>
+
+                <!-- Data Highlights -->
+                <div class="flex flex-wrap justify-center gap-4 md:gap-10 border-t border-gray-200 pt-8">
+                    <div class="text-center px-4">
+                        <span class="block text-3xl font-serif text-gold-500 mb-1">14+</span>
+                        <span class="text-[0.6rem] uppercase tracking-widest text-gray-500 font-bold">Advanced Degrees</span>
+                    </div>
+                    <div class="w-px h-10 bg-gray-200 hidden md:block"></div>
+                    <div class="text-center px-4">
+                        <span class="block text-3xl font-serif text-forest-900 mb-1">20+</span>
+                        <span class="text-[0.6rem] uppercase tracking-widest text-gray-500 font-bold">Public Servants</span>
+                    </div>
+                    <div class="w-px h-10 bg-gray-200 hidden md:block"></div>
+                    <div class="text-center px-4">
+                        <span class="block text-3xl font-serif text-forest-900 mb-1">8</span>
+                        <span class="text-[0.6rem] uppercase tracking-widest text-gray-500 font-bold">National Awards</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+            
+            <!-- Achievements Grid utilizing the <achievement-card> web component -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                
+                <!-- Component 1 -->
+                <achievement-card 
+                    image-src="https://placehold.co/800x600/062c22/d4af37?text=Graduation"
+                    category="Academic"
+                    title="Doctorate in Economics"
+                    recipient="Ahmad Musa (Garba Branch)"
+                    year="2025"
+                >
+                    <p>Successfully defended his doctoral thesis on emerging market infrastructures at the Ahmadu Bello University. His research is slated to be published in the National Economic Review later this year, marking a significant scholarly milestone for the family.</p>
+                </achievement-card>
+
+                <!-- Component 2 -->
+                <achievement-card 
+                    image-src="https://placehold.co/800x600/047857/fdfbf7?text=Leadership"
+                    category="Professional"
+                    title="Appointed Director General"
+                    recipient="Fatima Abdullahi"
+                    year="2024"
+                >
+                    <p>Elevated to the position of Director General of the State Health Commission. This appointment recognizes her twenty years of dedicated service to public health initiatives across Bauchi State and beyond.</p>
+                </achievement-card>
+
+                <!-- Component 3 -->
+                <achievement-card 
+                    image-src="https://placehold.co/800x600/171717/d4af37?text=Award"
+                    category="Community"
+                    title="Philanthropy Excellence Award"
+                    recipient="Ibrahim Sani"
+                    year="2023"
+                >
+                    <p>Honored by the local emirate council for his outstanding contributions to youth empowerment and the establishment of the Bara Educational Trust Fund, securing scholarships for underprivileged students.</p>
+                </achievement-card>
+
+                 <!-- Component 4 -->
+                 <achievement-card 
+                    image-src="https://placehold.co/800x600/064e3b/d4af37?text=Engineering"
+                    category="Innovation"
+                    title="Lead Architectural Engineer"
+                    recipient="Zainab Auwal"
+                    year="2025"
+                >
+                    <p>Led the structural engineering team for the newly commissioned Abuja Tech Hub. Her innovative use of sustainable materials was recognized by the National Society of Engineers as the project of the year.</p>
+                </achievement-card>
+
+                <!-- Pending Archive Additions Placeholder -->
+                <div class="lg:col-span-2 bg-parchment rounded-sm border-2 border-dashed border-gold-500/30 p-10 flex flex-col justify-center items-center text-center reveal">
+                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center text-gold-500 shadow-sm border border-gold-500/10 mb-6">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                    </div>
+                    <h3 class="font-serif text-3xl text-forest-900 mb-3">Digitizing Our History</h3>
+                    <p class="text-gray-500 font-light max-w-lg mx-auto mb-8">
+                        The family administration is continually compiling historical records. More professional milestones, academic degrees, and community awards will be published here by the designated administrators via the secure portal.
+                    </p>
+                    <a href="admin.html" class="text-xs font-bold uppercase tracking-widest text-forest-900 border-b border-forest-900 pb-1 hover:text-gold-600 hover:border-gold-600 transition-colors">
+                        Admin Login to Publish
+                    </a>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <app-footer></app-footer>
+
+    <script type="module" src="js/components.js"></script>
+    <script>
+        // Trigger reveal animations on scroll
+        document.addEventListener('DOMContentLoaded', () => {
+            const reveals = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        // Stagger the animation of cards slightly based on their DOM position
+                        setTimeout(() => {
+                            entry.target.classList.add('active');
+                        }, index * 100); 
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            reveals.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
