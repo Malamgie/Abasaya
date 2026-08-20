@@ -106,7 +106,7 @@
                     <div class="inline-block mb-8 relative">
                         <div class="absolute inset-0 bg-gold-500 rounded-full blur-xl opacity-20 animate-pulse"></div>
                         <div class="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-parchment shadow-2xl overflow-hidden relative z-10 bg-forest-900 mx-auto group">
-                            <img src="assets/images/hero-family-placeholder.jpg" alt="Branch Head" class="w-full h-full object-cover grayscale transition duration-500 group-hover:grayscale-0">
+                            <img id="dynamic-branch-image" src="assets/images/hero-family-placeholder.jpg" onerror="this.src='assets/images/hero-family-placeholder.jpg'" alt="Branch Head" class="w-full h-full object-cover grayscale transition duration-500 group-hover:grayscale-0">
                         </div>
                     </div>
                     
@@ -231,6 +231,10 @@
             document.title = `${branch.branchName} Lineage | Abasaya Family Heritage`;
             document.getElementById('dynamic-branch-name').innerText = branch.branchName;
             document.getElementById('dynamic-descendants-title').innerText = `Descendants of ${branch.branchName}`;
+
+            const branchImg = document.getElementById('dynamic-branch-image');
+            branchImg.src = `assets/images/${branch.branchName}.jpg`;
+            branchImg.alt = branch.branchName;
 
             const grid = document.getElementById('descendants-grid');
             const descendantsArray = branch.descendants || [];
