@@ -35,14 +35,7 @@
         .hero-gradient {
             background: linear-gradient(180deg, rgba(6,44,34,0.02) 0%, rgba(253,251,247,1) 100%);
         }
-        .child-card {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .child-card:hover {
-            box-shadow: 0 20px 40px -10px rgba(6, 44, 34, 0.08);
-            transform: translateY(-4px);
-            border-color: rgba(212, 175, 55, 0.4);
-        }
+        
         .grandchild-list {
             list-style: none;
             padding: 0;
@@ -50,20 +43,20 @@
         .grandchild-list li {
             position: relative;
             padding-left: 1.25rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.35rem;
         }
         .grandchild-list li::before {
             content: "";
             position: absolute;
             left: 0;
-            top: 0.5rem;
+            top: 0.55rem;
             width: 4px;
             height: 4px;
             background-color: #d4af37;
             border-radius: 50%;
         }
         
-        /* Fade in animation for content */
+        /* Fade in animation for outer content structure */
         .fade-in {
             animation: fadeIn 0.6s ease-out forwards;
         }
@@ -173,8 +166,8 @@
                     <p class="text-gray-500 uppercase tracking-[0.2em] text-xs font-bold" id="dynamic-descendants-title">Descendants</p>
                 </div>
 
-                <div id="descendants-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Populated dynamically by JavaScript -->
+                <div id="descendants-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                    <!-- Populated dynamically by JavaScript Web Components -->
                 </div>
             </section>
         </div>
@@ -190,7 +183,6 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
-            // Parse ID as an integer since we are routing by array index from discover.html
             const branchIdStr = urlParams.get('id');
             const branchIndex = parseInt(branchIdStr, 10);
 
@@ -224,14 +216,11 @@
             }
 
             try {
-                // Fetch the branch directly from the provided local data map
                 const branchData = familySeedData.branches[branchIndex];
-                
                 if (!branchData) throw new Error("Branch data null.");
 
                 renderBranchData(branchData);
                 showView('content');
-
             } catch (error) {
                 console.error("Failed to load branch data:", error);
                 showView('error');
@@ -239,15 +228,11 @@
         });
 
         function renderBranchData(branch) {
-            // Update Document Meta & Hero
             document.title = `${branch.branchName} Lineage | Abasaya Family Heritage`;
             document.getElementById('dynamic-branch-name').innerText = branch.branchName;
             document.getElementById('dynamic-descendants-title').innerText = `Descendants of ${branch.branchName}`;
 
-            // Descendants Processing
             const grid = document.getElementById('descendants-grid');
-            
-            // Defensively get descendants array
             const descendantsArray = branch.descendants || [];
             const totalChildren = descendantsArray.length;
             let totalGrandchildren = 0;
@@ -262,66 +247,44 @@
                         <p class="text-sm text-gray-400 mt-2 font-light">Check back later for updates from the family administration.</p>
                     </div>`;
             } else {
-                grid.innerHTML = descendantsArray.map(child => {
+                // Utilize the new <descendant-card> web component
+                grid.innerHTML = descendantsArray.map((child, index) => {
                     const cleanName = child.name || "Unknown";
                     const childrenList = child.children || [];
-                    
-                    // Source data validation badges ("(?)" and redacted "****")
-                    const needsVerification = cleanName.includes('(?)');
-                    const isRedacted = cleanName.includes('*****');
-                    
-                    let verificationBadge = '';
-                    if (needsVerification) {
-                        verificationBadge = `<span class="ml-2 inline-flex items-center px-1.5 py-0.5 rounded text-[0.55rem] font-bold bg-orange-100 text-orange-800 border border-orange-200 uppercase tracking-widest align-middle shadow-sm">Pending</span>`;
-                    } else if (isRedacted) {
-                        verificationBadge = `<span class="ml-2 inline-flex items-center px-1.5 py-0.5 rounded text-[0.55rem] font-bold bg-gray-200 text-gray-600 border border-gray-300 uppercase tracking-widest align-middle shadow-sm">Redacted</span>`;
-                    }
-
                     totalGrandchildren += childrenList.length;
                     
-                    // Grandchildren HTML - use CSS columns for large lists
-                    let childrenHtml = `<p class="text-sm text-gray-400 italic font-light">No descendants recorded.</p>`;
+                    const needsVerification = cleanName.includes('(?)');
+                    const isRedacted = cleanName.includes('*****');
+                    const displayName = cleanName.replace('(?)', '').trim();
+                    const delay = (index % 8) * 100;
+
+                    let childrenHtml = '';
                     if (childrenList.length > 0) {
                         const columnClass = childrenList.length > 5 ? 'sm:columns-2 gap-4' : '';
-                        
                         childrenHtml = `
-                            <ul class="grandchild-list text-sm text-gray-600 font-light ${columnClass}">
+                            <ul class="grandchild-list text-sm text-gray-600 font-light mt-3 border-t border-gray-100 pt-3 ${columnClass}">
                                 ${childrenList.map(gc => {
                                     const safeGc = gc || "Unknown";
-                                    const gcVerification = safeGc.includes('(?)') ? `<span class="ml-1 text-[0.5rem] font-bold text-orange-500 uppercase tracking-wider bg-orange-50 px-1 rounded">?</span>` : '';
-                                    return `<li class="break-inside-avoid text-gray-700">${safeGc} ${gcVerification}</li>`;
+                                    const gcVerification = safeGc.includes('(?)') ? '<span class="ml-1 text-[0.5rem] font-bold text-orange-500 uppercase tracking-wider bg-orange-50 px-1 rounded shadow-sm">?</span>' : '';
+                                    return `<li class="break-inside-avoid text-gray-700">${safeGc.replace('(?)', '').trim()} ${gcVerification}</li>`;
                                 }).join('')}
                             </ul>
                         `;
                     }
 
                     return `
-                        <div class="child-card bg-white border border-gray-200 rounded-xl p-6 relative overflow-hidden flex flex-col h-full shadow-sm">
-                            <!-- Top accent -->
-                            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-forest-800 to-gold-500"></div>
-                            
-                            <div class="flex justify-between items-start mb-6 pt-2">
-                                <div class="pr-4">
-                                    <h3 class="font-serif text-2xl text-forest-900 font-semibold mb-1 leading-tight">
-                                        ${cleanName.replace('(?)', '').trim()} ${verificationBadge}
-                                    </h3>
-                                    <p class="text-[0.65rem] uppercase tracking-[0.15em] text-gold-600 font-bold mt-2">2nd Generation</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex-grow bg-parchment rounded-lg p-5 border border-gold-500/10 shadow-inner">
-                                <h4 class="text-[0.65rem] uppercase tracking-widest text-forest-800 font-bold mb-4 flex items-center border-b border-gray-200 pb-2">
-                                    <svg class="w-4 h-4 mr-2 text-gold-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                                    Children (${childrenList.length})
-                                </h4>
-                                ${childrenHtml}
-                            </div>
-                        </div>
+                        <descendant-card 
+                            name="${displayName}" 
+                            needs-verification="${needsVerification}" 
+                            is-redacted="${isRedacted}" 
+                            children-count="${childrenList.length}" 
+                            animation-delay="${delay}">
+                            ${childrenHtml}
+                        </descendant-card>
                     `;
                 }).join('');
             }
 
-            // Update DOM Stats
             document.getElementById('stat-children').innerText = totalChildren;
             document.getElementById('stat-grandchildren').innerText = totalGrandchildren;
         }
