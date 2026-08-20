@@ -132,6 +132,60 @@ class AchievementCard extends HTMLElement {
     }
 }
 
+class DescendantCard extends HTMLElement {
+    connectedCallback() {
+        // Inject animation keyframes safely if not already present
+        if (!document.getElementById('descendant-card-styles')) {
+            const style = document.createElement('style');
+            style.id = 'descendant-card-styles';
+            style.textContent = `
+                @keyframes cardFadeInUp {
+                    from { opacity: 0; transform: translateY(20px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        const name = this.getAttribute('name') || 'Unknown';
+        const needsVerification = this.getAttribute('needs-verification') === 'true';
+        const isRedacted = this.getAttribute('is-redacted') === 'true';
+        const childrenCount = parseInt(this.getAttribute('children-count') || '0', 10);
+        const delay = this.getAttribute('animation-delay') || '0';
+        const childrenHtml = this.innerHTML;
+
+        let badgeHtml = '';
+        if (needsVerification) {
+            badgeHtml = `<span class="ml-2 inline-flex items-center px-1.5 py-0.5 rounded text-[0.55rem] font-bold bg-orange-100 text-orange-800 border border-orange-200 uppercase tracking-widest align-middle shadow-sm">Pending</span>`;
+        } else if (isRedacted) {
+            badgeHtml = `<span class="ml-2 inline-flex items-center px-1.5 py-0.5 rounded text-[0.55rem] font-bold bg-gray-200 text-gray-600 border border-gray-300 uppercase tracking-widest align-middle shadow-sm">Redacted</span>`;
+        }
+
+        this.innerHTML = `
+            <div class="bg-white border border-gray-200 rounded-xl p-6 relative flex flex-col h-full shadow-sm hover:-translate-y-1.5 hover:shadow-[0_25px_50px_-12px_rgba(212,175,55,0.15)] hover:border-gold-500/60 transition-all duration-500 group" style="animation: cardFadeInUp 0.8s ease-out forwards; opacity: 0; animation-delay: ${delay}ms;">
+                <!-- Top accent border -->
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-forest-900 to-gold-500 rounded-t-xl group-hover:h-1.5 transition-all duration-300"></div>
+                
+                <div class="mb-4 pt-1">
+                    <h3 class="font-serif text-2xl text-forest-900 font-bold mb-1 leading-tight pr-4 flex items-center flex-wrap gap-y-2">
+                        ${name} ${badgeHtml}
+                    </h3>
+                    <p class="text-[0.6rem] uppercase tracking-[0.15em] text-gold-600 font-bold mt-2">2nd Generation</p>
+                </div>
+                
+                <div class="flex-grow flex flex-col">
+                    <h4 class="text-[0.65rem] uppercase tracking-widest text-forest-800 font-bold flex items-center bg-parchment py-1.5 px-3 rounded border border-gold-500/10 w-max mb-3 shadow-inner">
+                        <svg class="w-3 h-3 mr-1.5 text-gold-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        ${childrenCount} Children
+                    </h4>
+                    ${childrenCount > 0 ? childrenHtml : '<p class="text-xs text-gray-400 italic font-light pt-2">No descendants recorded.</p>'}
+                </div>
+            </div>
+        `;
+    }
+}
+
 customElements.define('app-header', AppHeader);
 customElements.define('app-footer', AppFooter);
 customElements.define('achievement-card', AchievementCard);
+customElements.define('descendant-card', DescendantCard);
