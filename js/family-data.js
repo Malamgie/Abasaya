@@ -278,15 +278,7 @@ export const familySeedData = {
                 { name: "Maimuna Abdulaziz", children: [] }
             ]
         },
-        {
-            branchName: "Muhammad Garba",
-            descendants: [
-                { name: "Sa'adatu Muh'd", children: [] },
-                { name: "Asma'u Muh'd", children: [] },
-                { name: "Adamu Muh'd", children: [] },
-                { name: "Muh'd Muhammad", children: [] }
-            ]
-        },
+     
         {
             branchName: "Garba Musa — ADDITIONAL SUPPLIED ENTRY",
             descendants: [
