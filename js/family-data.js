@@ -39,7 +39,7 @@ export const familySeedData = {
                 { name: "Salamatu Garba", children: ["Umar Yusuf", "Sunusi Yusuf", "Sadik Yusuf"] },
                 { name: "Maimuna Garba", children: ["Aisha Aliyu"] },
                 { name: "Fatima Garba", children: [] },
-                { name: "Musa Garba", children: [] },
+                { name: "Musa Garba", children: ["Hajara Musa"] },
                 { name: "Amina Garba", children: ["Yasir Ibrahim"] },
                 { name: "Sadiq Garba", children: [] },
                 { name: "Aliyu Garba", children: [] },
